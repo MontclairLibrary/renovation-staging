@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Claude / editor session data
+.claude/
+
+# Internal working documents (keep local only)
+*.docx

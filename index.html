@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Montclair Public Library &amp; Cultural Center</title>
+<style>
+  :root {
+    --ink: #14233a;
+    --ink-soft: #46566b;
+    --brand: #1689d6;
+    --brand-dark: #0b6cb6;
+    --accent: #ffc21f;
+    --accent-dark: #f2ad00;
+    --accent-ink: #4a3500;
+    --line: #d8e3ec;
+    --bg: #ffffff;
+    --bg-alt: #eef6fc;
+    --bg-deep: #0b4f86;
+    --radius: 10px;
+    --maxw: 1140px;
+    --shadow: 0 2px 14px rgba(18, 90, 150, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { line-height: 1.2; color: var(--ink); }
+  p { margin: 0 0 1em; }
+  a { color: var(--brand); }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 72px 0; }
+  section:nth-of-type(even) { background: var(--bg-alt); }
+
+  .section-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+  .section-head h2 { font-size: 2rem; margin: 0 0 14px; }
+  .section-head p { color: var(--ink-soft); font-size: 1.05rem; }
+
+  /* ---------- Sticky nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(180%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 64px;
+  }
+  .brand-logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .brand-logos img {
+    display: block;
+    width: auto;
+    object-fit: contain;
+  }
+  .brand-logos .nav-logo-mpl { height: 38px; }
+  .brand-logos .nav-logo-mplf { height: 46px; }
+  .brand-logos .nav-logo-twp { height: 36px; }
+  .brand-logos .nav-divider {
+    width: 1px;
+    height: 34px;
+    background: var(--line);
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--brand); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: var(--brand); color: #fff; }
+  .btn-primary:hover { background: var(--brand-dark); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.7); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.15); }
+  .btn-outline { background: #fff; color: var(--brand); border-color: var(--brand); }
+  .btn-outline:hover { background: var(--brand); color: #fff; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 0; position: relative; }
+  .hero-image {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-image:
+      linear-gradient(120deg, rgba(7,52,98,0.92) 0%, rgba(9,62,112,0.80) 45%, rgba(9,62,112,0.74) 100%),
+      url('Montclair Library Main Exterior.jpg');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+  }
+  .hero-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(8, 48, 92, 0.40);
+    pointer-events: none;
+  }
+  .hero-circle-1 { width: 300px; height: 300px; top: 70px; left: -70px; }
+  .hero-circle-2 { width: 190px; height: 190px; top: 40px; right: 260px; }
+  .hero-circle-3 { width: 250px; height: 250px; bottom: -70px; right: 90px; }
+  .hero-circle-4 { width: 360px; height: 360px; top: 90px; right: 40px; background: rgba(8, 48, 92, 0.50); }
+  .hero-circle-5 { width: 240px; height: 240px; bottom: 20px; right: 300px; background: rgba(8, 48, 92, 0.45); }
+  .hero-overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 44px;
+  }
+  .hero-overlay h1 {
+    flex: 0 0 auto;
+    color: #fff;
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0;
+    max-width: 14ch;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+  }
+  .hero-intro {
+    flex: 1 1 0;
+    margin: 0;
+    padding-left: 28px;
+    border-left: 4px solid var(--accent);
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+  }
+  .hero-intro strong { color: var(--accent); }
+  .hero-credit {
+    position: absolute;
+    bottom: 14px;
+    right: 20px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.78rem;
+    font-style: italic;
+  }
+  .hero-band { background: var(--brand); }
+  .hero-band-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px 24px;
+  }
+  .hero-tagline {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.15rem;
+    font-weight: 500;
+  }
+  .btn-accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); white-space: nowrap; }
+  .btn-accent:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  /* ---------- Card row ---------- */
+  .card-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 1.12rem; margin: 0 0 12px; color: var(--brand); }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 0.96rem; }
+
+  /* ---------- Two-column generic ---------- */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow);
+  }
+  .logo-box {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px;
+    text-align: center;
+    margin-bottom: 16px;
+    background: #fff;
+  }
+  .logo-box img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+  /* ---------- Stats ---------- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+  .stat {
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 18px;
+    box-shadow: var(--shadow);
+  }
+  .stat .num { font-size: 2rem; font-weight: 800; color: var(--brand); display: block; }
+  .stat .label { color: var(--ink-soft); font-size: 0.95rem; margin-top: 6px; }
+
+  .fund-list { max-width: 820px; }
+  .fund-list ul { padding-left: 20px; color: var(--ink-soft); }
+  .fund-list li { margin-bottom: 8px; }
+
+  /* ---------- Accordion ---------- */
+  .building { margin-bottom: 48px; }
+  .building-photo {
+    height: 200px;
+    border-radius: var(--radius);
+    background:
+      linear-gradient(180deg, rgba(14,110,190,0.18), rgba(11,79,134,0.40)),
+      repeating-linear-gradient(45deg, #d6ebfb 0 18px, #e8f4fd 18px 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+  }
+  .building h3 { font-size: 1.5rem; margin: 0 0 12px; }
+  .building > p { color: var(--ink-soft); max-width: 75ch; }
+
+  .accordion { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; margin-top: 18px; }
+  .acc-item + .acc-item { border-top: 1px solid var(--line); }
+  .acc-trigger {
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    border: none;
+    padding: 18px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .acc-trigger:hover { background: var(--bg-alt); }
+  .acc-trigger .sign { color: var(--brand); font-size: 1.3rem; flex-shrink: 0; transition: transform 0.2s; }
+  .acc-trigger[aria-expanded="true"] .sign { transform: rotate(45deg); }
+  .acc-panel { display: none; padding: 14px 22px 22px; color: var(--ink-soft); font-size: 0.97rem; line-height: 1.6; }
+  .acc-panel.open { display: block; }
+
+  .acc-controls { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .acc-btn {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--brand);
+    cursor: pointer;
+  }
+  .acc-btn:hover { background: var(--bg-alt); }
+
+  .faq-group-title {
+    font-size: 1.25rem;
+    margin: 36px 0 14px;
+    color: var(--brand);
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 8px;
+  }
+  .faq-group-title:first-of-type { margin-top: 0; }
+
+  /* ---------- Timeline ---------- */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .step {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--brand);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .step .year { font-size: 1.6rem; font-weight: 800; color: var(--brand); }
+  .step .lbl { font-weight: 700; margin: 4px 0 12px; display: block; }
+  .step p { color: var(--ink-soft); margin: 0; font-size: 0.96rem; }
+  .timeline-note { text-align: center; margin-top: 28px; color: var(--ink-soft); }
+
+  /* ---------- Signup ---------- */
+  .signup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .signup-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+  }
+  .signup-card h3 { font-size: 1.4rem; margin: 0 0 14px; }
+  .signup-card p { color: var(--ink-soft); }
+  .signup-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .field-row { display: flex; gap: 10px; margin-top: 16px; }
+  .field-row input {
+    flex: 1;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 1rem;
+  }
+  .field-row input:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--bg-deep);
+    color: #cfdae2;
+    padding: 56px 0 32px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-col .flogo {
+    border-radius: 6px;
+    padding: 16px 18px;
+    text-align: center;
+    margin-bottom: 14px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+  }
+  .footer-col .flogo img { max-width: 100%; max-height: 56px; height: auto; width: auto; display: block; }
+  .footer-col a { color: #9fc3da; text-decoration: none; }
+  .footer-col a:hover { text-decoration: underline; }
+  .footer-bottom { padding-top: 22px; font-size: 0.9rem; color: #9fb0bd; }
+  .footer-bottom a { color: #9fc3da; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 12px 24px; }
+    .nav-toggle { display: block; }
+    .brand-logos .nav-divider,
+    .brand-logos .nav-logo-mplf,
+    .brand-logos .nav-logo-twp { display: none; }
+    .brand-logos .nav-logo-mpl { height: 32px; }
+
+    .card-row { grid-template-columns: 1fr 1fr; }
+    .two-col, .signup-grid { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr; }
+    .footer-cols { grid-template-columns: 1fr; }
+    .hero-image { min-height: 440px; }
+    .hero-overlay { flex-direction: column; align-items: flex-start; gap: 22px; }
+    .hero-overlay h1 { font-size: 2.4rem; max-width: 20ch; }
+    .hero-intro { padding-left: 18px; font-size: 1.02rem; }
+    .hero-band-inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .card-row { grid-template-columns: 1fr; }
+    section { padding: 52px 0; }
+    .hero-overlay h1 { font-size: 1.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand-logos">
+      <img class="nav-logo-mpl" src="MPL_Logo_Color.png" alt="Montclair Public Library">
+      <span class="nav-divider"></span>
+      <img class="nav-logo-mplf" src="cropped-MPLF-logo.png" alt="Montclair Public Library Foundation">
+      <span class="nav-divider"></span>
+      <img class="nav-logo-twp" src="Montclair-Township-Logo.png" alt="Township of Montclair">
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#built">What's Being Built</a></li>
+      <li><a href="#funding">Funding</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#next">Next Steps</a></li>
+      <li><a href="#feedback">Stay Informed</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-image">
+    <span class="hero-circle hero-circle-1"></span>
+    <span class="hero-circle hero-circle-2"></span>
+    <span class="hero-circle hero-circle-3"></span>
+    <span class="hero-circle hero-circle-4"></span>
+    <span class="hero-circle hero-circle-5"></span>
+    <div class="wrap hero-overlay">
+      <h1>Montclair Public Library &amp; Cultural Center</h1>
+      <p class="hero-intro">The Montclair Public Library has been selected to receive <strong>$37 million</strong> in transferable State tax credits through the New Jersey Economic Development Authority's Cultural and Arts Facilities Expansion (CAFE) Program, the largest public investment ever made in Montclair's library system. The award will fund a comprehensive renovation of both the Main Library and the Bellevue Avenue Branch.</p>
+    </div>
+    <span class="hero-credit">Photo: Main Library</span>
+  </div>
+  <div class="hero-band">
+    <div class="wrap hero-band-inner">
+      <p class="hero-tagline">A $37 million State investment to revitalize Montclair's libraries.</p>
+      <a class="btn btn-accent" href="#feedback">Share Your Thoughts &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY THIS MATTERS ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Why This Matters</h2>
+    </div>
+    <div class="card-row">
+      <div class="card">
+        <h3>This project addresses real, documented needs.</h3>
+        <p>A professional capital needs assessment found at least $14 million in deferred maintenance, aging infrastructure, and ADA accessibility gaps across both library buildings. These are not cosmetic issues. They affect safety, accessibility, and the library's ability to serve everyone who walks through the door.</p>
+      </div>
+      <div class="card">
+        <h3>It creates a once-in-a-generation opportunity.</h3>
+        <p>The CAFE program allows Montclair to do far more than patch aging systems. It allows the community to reimagine what a public library can be, a place to learn new skills, make things, gather, and participate in the cultural life of the town.</p>
+      </div>
+      <div class="card">
+        <h3>The cost to local taxpayers is significantly reduced.</h3>
+        <p>The State of New Jersey is providing $37 million in tax credits to fund this project. Without this program, the full burden of these repairs and improvements would fall on Montclair residents. CAFE allows the Township to leverage State dollars so that local funds go further.</p>
+      </div>
+      <div class="card">
+        <h3>The libraries remain free and open to everyone.</h3>
+        <p>Every improvement is aimed at making the libraries more functional, more accessible, and more welcoming, for families, seniors, students, people with disabilities, and residents without access to technology at home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAFE PROGRAM ===== -->
+<section>
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <h2 style="font-size:2rem;margin:0 0 18px;">What Is the CAFE Program?</h2>
+        <p>The Cultural and Arts Facilities Expansion (CAFE) Program is run by the New Jersey Economic Development Authority (NJEDA). It uses transferable State tax credits to help communities make major investments in cultural and civic facilities, libraries, museums, performing arts centers, and similar public institutions.</p>
+        <p>Montclair applied through a competitive process and was awarded $37 million in tax credits. Those credits are tied directly to the approved library project and cannot be redirected to other municipal needs.</p>
+      </div>
+      <div class="panel">
+        <div class="logo-box"><img src="NJEDA_logo.png" alt="New Jersey Economic Development Authority" style="max-width:240px;"></div>
+        <p style="margin:0;"><a href="https://www.njeda.gov/cafe">Learn more at njeda.gov/cafe &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FUNDING ===== -->
+<section id="funding">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How Is This Being Funded?</h2>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><span class="num">$37,327,219</span><span class="label">Total project cost</span></div>
+      <div class="stat"><span class="num">$36,661,719</span><span class="label">CAFE tax credit award</span></div>
+      <div class="stat"><span class="num">~$8 million</span><span class="label">Estimated total Township exposure</span></div>
+    </div>
+    <div class="fund-list" style="margin:0 auto;">
+      <p>Here is how the funding works in plain terms: the library receives the tax credits after construction is complete. To fund construction in the meantime, the Township of Montclair issues bonds. Those bonds are repaid using the proceeds from selling the tax credits, which are distributed over five years after the project is finished.</p>
+      <p>For every roughly $1 the Township commits, Montclair gains about $4.50 in total project value: an approximately $37 million library for an estimated $8 million in local Township exposure.</p>
+      <p><strong>Funding sources:</strong></p>
+      <ul>
+        <li>CAFE tax credit award: $36,661,719 (NJEDA). The actual cash value will be roughly 10% lower, because tax credits are sold at a discount to convert them into usable funds.</li>
+        <li>Township of Montclair bond authorization: $5,000,000 (already approved, unspent)</li>
+        <li>Montclair Public Library Foundation capital campaign: $2,000,000 minimum</li>
+        <li>Township additional bond issuance to cover the remaining gap (to be finalized with bond counsel). This gap also includes the cost of debt service on the bonds, which is not yet known.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOUNDATION ROLE ===== -->
+<section>
+  <div class="wrap" style="max-width:840px;">
+    <h2 style="font-size:2rem;margin:0 0 20px;">The Role of the Montclair Public Library Foundation</h2>
+    <p>The Montclair Public Library Foundation is the philanthropic partner in this project. The Foundation is running a capital campaign to raise funds that complement the State tax credit award and the Township's financial contribution, with a goal of reducing the local tax burden as much as possible.</p>
+    <p>The Foundation has committed to raising a minimum of $2 million. That floor is part of the project's approved funding structure. But the campaign is designed to raise significantly more than that. In a project of this scale, unanticipated costs are a normal part of construction. Every additional dollar the Foundation raises is a dollar that does not have to come from the Township, and ultimately from taxpayers.</p>
+    <p>And beyond protecting the budget, philanthropic support shapes what this library can actually become. The spaces described in the CAFE application represent the floor of what is possible, the program the library is obligated and committed to deliver. Philanthropic dollars unlock everything above that floor. Better materials. More equipment. Richer finishes. Spaces that do not just function well but feel extraordinary. The difference between a good public library and a truly great one is almost always the level of community investment behind it.</p>
+    <p>Montclair is a crown jewel town. It is one of the most educated, culturally engaged, and civically active communities in New Jersey. Its residents read voraciously, support the arts, and use their library at rates that put most comparable communities to shame. Last year the library welcomed more than 187,000 visitors, a number that has been climbing steadily and is on track to exceed 275,000 after reopening. This community has earned a library that matches its ambitions. A facility that is not just functional and modern, but genuinely beautiful, a public institution that residents feel proud to walk into, proud to bring their children to, and proud to show visitors.</p>
+    <p>That is what this project can be. The CAFE program makes it possible. Philanthropy makes it exceptional.</p>
+    <p>There is no ceiling on what the Foundation can raise. Every dollar above the minimum is an investment in a better outcome for every resident who walks through these doors.</p>
+    <div class="logo-box" style="max-width:320px;"><img src="cropped-MPLF-logo.png" alt="Montclair Public Library Foundation" style="max-width:200px;"></div>
+    <a class="btn btn-primary" href="#">Support the Campaign</a>
+  </div>
+</section>
+
+<!-- ===== WHAT'S BEING BUILT ===== -->
+<section id="built">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What's Being Built</h2>
+      <p>The renovation covers both library buildings, the Main Library at 50 S. Fullerton Avenue and the Bellevue Avenue Branch at 185 Bellevue Avenue. The spaces described below are part of the approved CAFE application. They represent the library's commitments to the State of New Jersey and to the Montclair community. The final design will be developed by the architect selected through the current competitive process. The architect's role is to realize this program, not to define it.</p>
+    </div>
+
+    <!-- Main Library -->
+    <div class="building">
+      <div class="building-photo">Photo: Main Library exterior</div>
+      <h3>Main Library, 50 S. Fullerton Avenue</h3>
+      <p>The Main Library will undergo a full gut rehabilitation of all mechanical, electrical, and plumbing systems. Every floor will be rebuilt from the inside out. The building will be reorganized around new program spaces while retaining its collections and core library services.</p>
+      <div class="acc-controls">
+        <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+        <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+      </div>
+      <div class="accordion" data-accordion>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Teaching Kitchen and Cafe</span><span class="sign">+</span></button>
+          <div class="acc-panel">A fully equipped teaching kitchen and cafe designed to support cooking classes, cultural food demonstrations, nutrition education, and community meals. The space hosts instructor-led programs, hands-on workshops, and youth and adult classes, with flexible cafe seating for social interaction and everyday use. Food becomes a cultural medium here, letting participants explore global traditions, family heritage, and community storytelling through hands-on culinary arts, from culturally significant recipes to intergenerational cooking and food history. It treats cooking not simply as a practical skill but as a form of artistic expression and cultural learning accessible to all ages, with equipment such as an induction cooktop designed to seat roughly a dozen students safely at a time.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Auditorium and Performance Space</span><span class="sign">+</span></button>
+          <div class="acc-panel">A purpose-built venue for live performances, author talks, film screenings, lectures, civic forums, and large public gatherings, with multiple staging formats and high-quality audiovisual presentation. As the library's signature cultural space, it anchors a broad range of arts and humanities programming, including literary events, musical performances, panel discussions, and community arts presentations. It serves as a central gathering place where residents experience cultural content, engage in civic dialogue, and share in artistic experiences. As the primary indoor performance venue in the facility, it is essential to delivering accessible, high-impact cultural programming.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Exhibition Gallery</span><span class="sign">+</span></button>
+          <div class="acc-panel">Gallery spaces for rotating exhibitions, presentations by local and regional artists, historical and archival displays, and community storytelling projects, with professional-quality installation for framed artworks, photography, interpretive panels, and mixed-media exhibits. It accommodates both curated shows and community-driven displays throughout the year, woven into the everyday experience of the library rather than cordoned off. The gallery gives residents direct access to artwork, historical narratives, and thematic exhibitions that reflect Montclair's diverse cultural identity, showcasing local artists, community history, and student work. By offering a public platform for visual expression and cultural storytelling, it strengthens community engagement with the arts.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Outdoor Mixed-Use Terrace</span><span class="sign">+</span></button>
+          <div class="acc-panel">An outdoor terrace built to host readings, acoustic music, art talks, small performances, workshops, and informal community gatherings, with seating, power access, lighting, and visibility to surrounding program spaces. It works both as a spillover area for indoor events and as a standalone venue for intimate outdoor programs across the year, supporting storytimes, yoga, seasonal classes, and poetry readings. The terrace extends the library's cultural programming into an accessible, comfortable open-air environment for those who prefer to participate outdoors. A durable, year-round canopy is envisioned so that rain is never a deterrent.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Outdoor Main Plaza</span><span class="sign">+</span></button>
+          <div class="acc-panel">A large, multi-use outdoor plaza designed to host festivals, concerts, author events, civic gatherings, performances, book fairs, and seasonal cultural celebrations, with flexible open space for stages, vendor setups, and audience seating. Rebuilt as an amphitheater and festival site, it functions as the Main Library's primary exterior event venue and as a public cultural square for events too large to hold indoors. It supports concerts, multicultural celebrations, literary festivals, arts markets, and community storytelling, making cultural participation visible and accessible to the entire neighborhood. The plaza reinforces the library's position as an inclusive cultural anchor in Montclair's downtown.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Adult FabLab</span><span class="sign">+</span></button>
+          <div class="acc-panel">A fully equipped makerspace for hands-on making, fabrication, digital design, prototyping, and creative technology instruction for adults. It includes workbenches, hand tools, 3D printers, laser cutters, CNC equipment, electronics stations, and design computers, plus shop-class woodworking equipment, supporting structured classes, open lab hours, and community-led projects. Modeled on full-service fabrication labs with a wood shop, vinyl cutter, resin and filament 3D printing, an electronics workbench, and a laser cutter, it gives residents access to tools that are typically unavailable or unaffordable for individuals. The lab doubles as a cultural production studio for sculpture, mixed-media work, printmaking, wearable art, and object-making, strengthening Montclair's creative economy and opening pathways into trades and emerging creative industries.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Flexible Classrooms</span><span class="sign">+</span></button>
+          <div class="acc-panel">Technology-enabled classrooms used by the Adult School of Montclair and community partners for courses, arts workshops, digital skills classes, and community learning, with flexible setups for instruction, small-group activities, and partner-led programs. They provide dedicated space for cultural education, including arts instruction, creative writing, digital media lessons, ESL, and humanities programming. The rooms expand the library's ability to offer accessible, structured cultural classes for residents of all ages.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Digital Commons</span><span class="sign">+</span></button>
+          <div class="acc-panel">A computer lab supporting digital literacy instruction, creative software access, research support, and computer-based learning, with computers, peripherals, and hands-on instruction for guided or independent use. It provides equitable access to digital arts tools, media-creation software, and research platforms that are essential to today's cultural and creative activities. The space supports digital art, graphic design, media editing, and other technology-based learning that directly contributes to cultural engagement, equipped with adaptive technology and bilingual capacity.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Business Center</span><span class="sign">+</span></button>
+          <div class="acc-panel">A public-facing production studio that supports printing, scanning, design work, exhibit preparation, document creation, and media finishing for patrons, artists, students, nonprofits, and community organizations. It offers advanced tools, including wide-format printing, high-speed scanning, binding, cutting, laminating, and design workstations, used to create posters, brochures, signage, portfolios, and materials for arts events and exhibitions. Community members can produce exhibit signage, event posters, program brochures, art prints, and interpretive materials, with production support for library-led exhibitions, public art initiatives, and community arts groups. Functioning as a micro production lab, it expands equitable access to professional creative and finishing equipment for small business owners, job seekers, and anyone who needs it.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Quiet Work and Reading Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">A silent room for reading, research, writing, and independent study in a distraction-free environment, with soft seating, laptop desks, natural light, and focused space for extended work. It supports sustained engagement with literature, humanities research, and individual creative work. By offering a dedicated quiet space, it lets patrons participate more fully in the cultural and intellectual life of the library, an alternative to commercial coworking spaces and crowded cafes.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Montclair Architectural History and Preservation Center</span><span class="sign">+</span></button>
+          <div class="acc-panel">A research space providing access to local history materials, architectural records, preservation documents, maps, drawings, and special collections, with study space and reference assistance focused on Montclair's built environment and community history. Built around the library's extensive deed collection, it preserves and provides access to the community's architectural and cultural heritage through documents, plans, photographs, and archival materials. A digital preservation lab supports digitization of historical collections, and residents can research the history of their homes and neighborhoods while engaging with materials that support exhibits, preservation efforts, and cultural learning.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Jazz Library</span><span class="sign">+</span></button>
+          <div class="acc-panel">A dedicated cultural space celebrating jazz as both a literary and listening experience, honoring one of Montclair's most significant artistic legacies. It houses a curated print collection of biographies, histories, criticism, and cultural analysis, and supports listening stations and digital access to recordings as the collection grows. Designed as an intimate environment for discovery and reflection, the room lets patrons explore jazz through reading, listening, research, and personal study. This hybrid literary-and-audio model supports music appreciation, cultural education, and intergenerational learning, strengthening the library's role as a steward of local creative heritage.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Podcast, Music, and Media Studios</span><span class="sign">+</span></button>
+          <div class="acc-panel">Sound-isolated studios equipped for podcasting, music recording, voice work, and digital media production, supporting both independent projects and instructor-led programs with recording tools, editing software, and a controlled environment for high-quality audio and video. They expand community access to creative media production, from podcasts and music to oral histories, interviews, and digital storytelling. Available to patrons of all ages, the studios support artistic expression, cultural documentation, and media education, helping residents produce original content and preserve community voices.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Teen Wing</span><span class="sign">+</span></button>
+          <div class="acc-panel">A vibrant teen cultural hub for reading, creative collaboration, digital media, gaming, group study, and youth-led activities, with flexible seating, collaboration tables, program zones, and technology for both independent use and structured programming. Intentionally designed as a safe, welcoming environment, it gives teens a place to gather after school, work on projects, attend workshops, and explore new interests. The wing centers youth expression and community identity across a full spectrum of arts engagement, from literary discovery and digital media creation to collaborative arts projects, writing clubs, and visual and performing arts workshops, all designed for and with Montclair's teenagers. By providing a cultural home for one of the most underserved age groups in public cultural spaces, it helps teens build confidence, find community, and engage with the arts in ways that are meaningful and developmentally responsive.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Children's STEAM Discovery Lab</span><span class="sign">+</span></button>
+          <div class="acc-panel">A hands-on workshop where children explore science, technology, engineering, art, and math through creative projects, guided discovery, and play-based learning. It is equipped with child-friendly robotics kits, simple circuits, building materials, digital devices, and artistic tools that support open-ended experimentation in both structured classes and drop-in learning. Children tinker, solve problems, create art, and collaborate, moving from early coding and digital design to crafting, storytelling, and engineering challenges. By embedding art directly into STEM learning, the lab helps children develop the creative confidence to become lifelong participants in the arts.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Children's Story and Activity Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">A flexible room for storytimes, children's performances, hands-on arts activities, and family programs, supporting both structured classes and informal learning for groups of children and caregivers. It provides a dedicated environment for early literacy, music and movement, storytelling, and family-centered arts programming. Young children engage with books, language, and creative expression in a developmentally appropriate setting, while families gain consistent access to cultural programs that build a foundation for lifelong participation in the arts.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Sensory Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">A quiet, controlled environment designed for neurodivergent children and adults who need reduced stimulation or sensory regulation, with soft lighting, textured materials, and acoustic privacy. It supports short breaks during visits, decompression before or after programs, and individualized use for patrons who benefit from a calming space. By providing a regulated place to reset and manage sensory input, the room removes barriers to participation in storytimes, performances, and workshops, ensuring that all community members can take part in arts, literacy, and educational programs.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bellevue Branch -->
+    <div class="building">
+      <div class="building-photo">Photo: Bellevue Avenue Branch exterior</div>
+      <h3>Bellevue Avenue Branch, 185 Bellevue Avenue</h3>
+      <p>The Bellevue Branch is a historic 1914 Carnegie library. The project adds 5,600 SF to the building, more than doubling its size, while restoring the historic structure and making it fully accessible for the first time.</p>
+      <div class="acc-controls">
+        <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+        <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+      </div>
+      <div class="accordion" data-accordion>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>New ADA-Compliant Entrance and Elevator</span><span class="sign">+</span></button>
+          <div class="acc-panel">For the first time, the branch will be fully accessible. A new ground-level main entrance on the Norwood side, the only location that makes ADA access feasible, connects directly to a new elevator serving every level of the building. The entrance vestibule and lobby double as a flexible welcome space, with room for the Friends' book sale, community information, and stroller parking.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Multipurpose Community Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">The branch's primary indoor cultural venue, designed for author talks, small performances, art workshops, classes, film screenings, community meetings, and neighborhood programs. Its flexible layout shifts seamlessly between uses, from readings and artist talks to hands-on workshops and community forums, accommodating a wide range of setups and group sizes throughout the year. Projection and smartboard capability support presentations, screenings, and instruction, making this the heart of accessible, high-quality programming at Bellevue.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Teen Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">A dedicated space for teen reading, study, digital activities, and creative hangout time, with flexible seating, work tables, and access to teen collections. It supports everyday after-school needs, homework, and social connection alongside youth-centered programs such as writing groups, art and digital media sessions, book clubs, and cultural discussions that help teens build confidence, skills, and community. Positioned to serve nearby middle and high school students, the room is set apart by a glass wall and door that give teens a space of their own while keeping it open and welcoming.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Children's Room</span><span class="sign">+</span></button>
+          <div class="acc-panel">A purpose-built space for early literacy support, family reading, children's play, and cultural programming for young families, with picture books, early readers, child-sized shelving, and developmentally appropriate seating. It serves as the hub for read-alouds, music and movement, simple art projects, and cultural celebrations that give children consistent exposure to books, language, and creative expression. The redesign responds to steadily growing attendance and adds a sink to support art, crafts, and hands-on activities.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Classrooms (two rooms)</span><span class="sign">+</span></button>
+          <div class="acc-panel">Two enclosed rooms for tutoring, small-group instruction, arts workshops, language learning, homework help, book discussions, and partner-led programs. The smaller existing classroom suits intimate, hands-on sessions that need a quiet, focused setting, while the newly added room provides space for parallel programming so the branch can host more activities at once. Both are equipped with smartboards, and one can be set up as a creative studio for art and media projects.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Redesigned Front Plaza</span><span class="sign">+</span></button>
+          <div class="acc-panel">The branch's primary exterior program area, rebuilt to accommodate performances, author readings, neighborhood festivals, small concerts, cultural demonstrations, and civic events, with flexible space for both scheduled programs and informal community use. It lets the library host larger audiences than indoor rooms can hold and serves residents who prefer open-air settings. As the rear green space is reduced, this front courtyard becomes the branch's main outdoor gathering place, anchoring cultural life at the entrance to the building.</div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false"><span>Historic Preservation</span><span class="sign">+</span></button>
+          <div class="acc-panel">The original facade and windows of the 1914 Carnegie building will be restored to preservation standards, and the addition is designed in harmony with the historic architecture, using complementary materials and massing that distinguish new from old without undermining the integrity of the original building. Inside, signature historic features are preserved, including the classic Carnegie circulation desk and the historic character of the main reading spaces, so the branch's heritage remains part of the everyday experience.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="wrap" style="max-width:860px;">
+    <div class="section-head">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <h3 class="faq-group-title">About the Funding &amp; Tax Credits</h3>
+    <div class="acc-controls">
+      <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+      <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+    </div>
+    <div class="accordion" data-accordion>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Is this really $37 million in State funding?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Yes. Montclair has been awarded $37 million in transferable State tax credits through the CAFE program, administered by the New Jersey Economic Development Authority. It is the largest public investment ever made in Montclair's library system, and it significantly reduces the local cost of renovating and modernizing both branches.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>$37 million sounds like a lot. Why does a library need that much?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Public libraries are complex buildings with aging infrastructure. A recent capital needs assessment identified roughly $14 to $15 million in essential repairs alone, including decades of deferred maintenance, ADA accessibility requirements, and major building systems. The library also completed a conceptual study and formal cost estimating in 2025 as part of the CAFE application. The $37 million figure reflects those needs plus a full modernization, and it has been reviewed by NJEDA and an independent third party.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What does '$37 million in tax credits' actually mean? When does the money arrive?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The CAFE award is not a cash grant. No State check is written to the library or the Township. Instead, NJEDA issues tax credits after construction is complete and certified, released in five equal annual installments over five years. Because construction has to be paid for upfront, the Township issues bonds during the construction period, and the proceeds from selling the tax credits are used to pay down that debt.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What if the tax credits sell for less than expected?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Because the library and Township do not have State tax liability of their own, the credits are sold to a buyer, typically a corporation or insurer, who converts them into cash. The current agreement is to sell at about 90 cents per dollar of credit, so the usable cash value is roughly 10% below the face amount. State law sets a floor of 85 cents per dollar, below which the State itself must purchase the credits, so there is a guaranteed minimum. If the market pays more, the Township benefits from the higher proceeds.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Is the Township guaranteed to get the credits?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Once the award agreement is signed, the tax credits become a binding obligation between the library and NJEDA. As long as the project is built to specification, on schedule, to prevailing wage standards, meeting green building requirements, and operating as a cultural facility, the State is legally required to issue the credits. The risk in this project is construction risk, not credit risk. If the project is built, the credits come.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Why is the library the applicant and not the Township?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Municipal governments are not eligible applicants under CAFE. The program was created for cultural arts institutions, and libraries are specifically named in the enabling legislation. The library qualifies, and serves as the applicant and lead entity managing the project. The Township participates as the financing and administrative partner, but the legal agreement with NJEDA runs through the library.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Can the CAFE money be used for the schools budget or other municipal needs?</span><span class="sign">+</span></button>
+        <div class="acc-panel">No. The CAFE program is restricted to the building, expansion, and modernization of eligible cultural facilities. The $37 million is provided as transferable tax credits tied directly to this approved library project. These funds cannot be redirected, transferred, or repurposed for other municipal needs, including school budgets or unrelated capital projects.</div>
+      </div>
+    </div>
+
+    <h3 class="faq-group-title">Taxpayer Impact &amp; Oversight</h3>
+    <div class="acc-controls">
+      <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+      <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+    </div>
+    <div class="accordion" data-accordion>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>How does this benefit local taxpayers? Will my taxes go up?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The goal of the CAFE program is to reduce the local financial burden, not increase it. Without this program, Montclair would still have to address the same major building and accessibility problems, at a much higher local cost. By leveraging State tax credits, the project moves forward at a fraction of what it would otherwise cost residents: an approximately $37 million library for an estimated $8 million in local Township exposure.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What is the Township's total financial exposure?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The Township's total estimated exposure is approximately $8 million, which includes the $5 million bond authorization already approved in 2025. The Township will front the full construction cost through bonds, but tax credit proceeds over five years will retire the majority of that debt. The roughly $8 million figure is what remains after those proceeds are applied. It is an illustrative estimate that will shift with bond term, timing, and interest rates.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What happens if project costs increase?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The Township and library will maintain strong oversight, clear reporting, and phased planning, and contingencies are built into the budget for unforeseen costs. The remaining funding gap also includes the cost of borrowing (debt service on the bonds), which is not yet known and depends on how and when the Township issues debt. The intent of leveraging State funding is to reduce financial risk, not increase it.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What happens to the $5 million the Township already approved?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The Township Council authorized $5 million for library capital improvements in 2025. The library has not spent any of it and intends to use it only for this project. NJEDA treats that $5 million as the Township's equity contribution to the CAFE project, so it supports the funding gap directly.</div>
+      </div>
+    </div>
+
+    <h3 class="faq-group-title">What's Being Fixed and Built</h3>
+    <div class="acc-controls">
+      <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+      <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+    </div>
+    <div class="accordion" data-accordion>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What problems are being addressed?</span><span class="sign">+</span></button>
+        <div class="acc-panel">A professional capital needs assessment identified significant deferred maintenance, aging building systems, and ADA accessibility gaps across both buildings, along with space limitations that affect programs and services. These repairs are essential to keep the libraries safe, functional, and accessible to everyone.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Is this just about fixing old buildings? Why not do the bare minimum repairs?</span><span class="sign">+</span></button>
+        <div class="acc-panel">No. Critical repairs are a priority, but this is a rare, once-in-a-generation opportunity. The CAFE program lets Montclair address urgent needs and modernize at the same time, improving layouts, technology, flexibility, and accessibility in ways that would not likely be feasible again for decades.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Will the buildings still be libraries?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Yes, completely. The project improves and expands the libraries. The renovated buildings will have more space, better accessibility, and new programming areas, including maker spaces, media studios, classrooms, and cultural gathering spaces, alongside the collections, study spaces, and services that residents already use every day.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Why invest so much in libraries in a digital age?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Libraries are among the most heavily used and trusted public spaces. They offer free access to technology and the internet, educational and cultural programming, resources for job seekers and students, and safe, welcoming spaces for people of all ages. In a town like Montclair, the public library remains one of the only free, truly democratic spaces open to everyone.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Is this turning the library into something fancy or exclusive?</span><span class="sign">+</span></button>
+        <div class="acc-panel">No. Every improvement is focused on making the libraries more functional, more accessible, and more welcoming to everyone, families, seniors, students, people with disabilities, and residents without access to technology at home. Well-designed public spaces support learning, dignity, and community use. That is the goal here.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Why do both branches need work? Why not just one?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Both buildings have documented infrastructure and accessibility needs and serve different parts of the community. Investing in both ensures equitable improvements across the entire library system, and the CAFE program requires a single, coordinated construction schedule.</div>
+      </div>
+    </div>
+
+    <h3 class="faq-group-title">Timeline, Construction &amp; Process</h3>
+    <div class="acc-controls">
+      <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+      <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+    </div>
+    <div class="accordion" data-accordion>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>When will construction start? Will the libraries close?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Construction is hoped to begin in 2027, following design finalization, permitting, and financing approvals in 2026. Reopening is targeted for early 2030. Any temporary closures or service changes will be communicated well in advance, and every effort will be made to keep services accessible to residents during the construction period.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Where can I access library services during construction?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Both buildings are expected to close to the public at the same time so construction can run concurrently and meet the program deadline. The team is committed to minimizing disruption and is exploring temporary service options, including a satellite presence at Montclair State University, partnerships with local churches and community spaces, and pop-up service points around town. Any closures or service changes will be communicated well in advance.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Does the project really have to be finished in four years?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Yes. NJEDA's four-year construction deadline starts when the award agreement is signed, and the library and Township cannot extend it on their own. This is why both buildings close at the same time and construction runs concurrently. Moving efficiently through design, permitting, and approvals keeps the project on schedule and shortens the time the Township carries construction debt.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Can the buildings be sold or repurposed later?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Not freely during the five-year period after completion, when the facilities must continue to operate as compliant cultural institutions. After that period, normal municipal decision-making applies. These are public libraries and will remain so.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Who is involved in decision-making?</span><span class="sign">+</span></button>
+        <div class="acc-panel">
+          <ul style="margin:0;padding-left:20px;">
+            <li>Township of Montclair, fiscal oversight and project support</li>
+            <li>Montclair Public Library, planning, services, and community engagement</li>
+            <li>Library Board of Trustees, governance and strategic direction</li>
+            <li>Montclair Public Library Foundation, philanthropic support</li>
+            <li>Historic Preservation Commission, guidance on the Bellevue Avenue Branch</li>
+          </ul>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Will the public have a say in what gets built?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Yes. Community input will be central to planning and design. Public meetings, surveys, and feedback opportunities will be scheduled throughout the process. Community feedback will shape how the renovated libraries function and serve residents.</div>
+      </div>
+    </div>
+
+    <h3 class="faq-group-title">Philanthropy &amp; the Foundation</h3>
+    <div class="acc-controls">
+      <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
+      <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
+    </div>
+    <div class="accordion" data-accordion>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What role does the Library Foundation play?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The Montclair Public Library Foundation is the philanthropic partner in the project. It works hand in hand with library leadership to steward the project forward and to inspire donors to help bring the full vision to life, supporting modern, beautiful, and welcoming library spaces and aspects of modernization that go beyond basic infrastructure.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Why is philanthropy needed if the State is investing $37 million?</span><span class="sign">+</span></button>
+        <div class="acc-panel">The CAFE program is designed to pair State investment with meaningful local participation, so communities are expected to have a financial stake in the project. In Montclair's case, Township and philanthropic support together unlock an extraordinary return. Philanthropy also lets the community shape the quality, character, and experience of the spaces, ensuring the renovated libraries are not only functional but modern, welcoming, and reflective of Montclair's values. Every dollar the Foundation raises is a dollar that does not have to come from taxpayers.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>What will philanthropic dollars be used for?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Philanthropic support may fund elements of modernization that enhance how spaces look, feel, and function; interior design, furnishings, and finishes; technology and flexible space solutions; programmatic spaces for learning, culture, and community gathering; and special features that elevate the overall experience.</div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false"><span>Shouldn't function come before "beautiful" spaces?</span><span class="sign">+</span></button>
+        <div class="acc-panel">Function and beauty go hand in hand in public spaces. Well-designed environments support learning, dignity, accessibility, and community use, especially in a space meant to serve everyone. The CAFE program delivers the functional foundation, and philanthropy helps make the result exceptional.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT HAPPENS NEXT ===== -->
+<section id="next">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What Happens Next</h2>
+    </div>
+    <div class="timeline">
+      <div class="step">
+        <span class="year">2026</span>
+        <span class="lbl">Design and Planning</span>
+        <p>The library is selecting an architect through a competitive process. Once selected, design development begins. Community engagement, permitting, and financing approvals all run in parallel during this phase.</p>
+      </div>
+      <div class="step">
+        <span class="year">2027</span>
+        <span class="lbl">Construction Begins</span>
+        <p>Renovation work starts at both locations simultaneously. The Township will have confirmed bond financing in place before this phase begins.</p>
+      </div>
+      <div class="step">
+        <span class="year">2030</span>
+        <span class="lbl">Reopening</span>
+        <p>The renovated Montclair Public Library and Cultural Center opens to the public.</p>
+      </div>
+    </div>
+    <p class="timeline-note">Updates will be shared as each milestone is reached. Sign up below to stay informed.</p>
+  </div>
+</section>
+
+<!-- ===== FEEDBACK / SIGNUP ===== -->
+<section id="feedback">
+  <div class="wrap">
+    <div class="signup-grid">
+      <div class="signup-card">
+        <h3>Tell Us What You Think</h3>
+        <p>The renovated libraries will be shaped by the community they serve. Share your thoughts, ideas, and questions using the form below, or take a few minutes to fill out our community survey.</p>
+        <div class="signup-actions">
+          <a class="btn btn-primary" href="#">Share your feedback</a>
+          <a class="btn btn-outline" href="#">Take the community survey</a>
+        </div>
+      </div>
+      <div class="signup-card">
+        <h3>Stay Informed</h3>
+        <p>Enter your email address to receive project updates directly.</p>
+        <form class="field-row" onsubmit="return false;">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <button class="btn btn-primary" type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <div class="flogo"><img src="MPL_Logo_Color.png" alt="Montclair Public Library"></div>
+        <a href="https://www.montclairlibrary.org">montclairlibrary.org</a>
+      </div>
+      <div class="footer-col">
+        <div class="flogo"><img src="cropped-MPLF-logo.png" alt="Montclair Public Library Foundation"></div>
+        <a href="#">Donate to the Foundation</a>
+      </div>
+      <div class="footer-col">
+        <div class="flogo"><img src="Montclair-Township-Logo.png" alt="Township of Montclair"></div>
+        <a href="https://www.montclairnjusa.org">montclairnjusa.org</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Questions about this project? Contact Radwa Ali, Library Director: <a href="mailto:director@montclairlibrary.org">director@montclairlibrary.org</a> | (973) 744-0500 x8010</p>
+      <p><a href="#">Download the press release [PDF]</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Accordions (independent per group, multiple can stay open)
+  document.querySelectorAll('[data-accordion] .acc-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      btn.nextElementSibling.classList.toggle('open', !expanded);
+    });
+  });
+
+  // Open all / Close all controls
+  document.querySelectorAll('.acc-controls').forEach(function (controls) {
+    var accordion = controls.nextElementSibling;
+    controls.addEventListener('click', function (e) {
+      var action = e.target.getAttribute('data-acc-action');
+      if (!action) return;
+      var open = action === 'open';
+      accordion.querySelectorAll('.acc-trigger').forEach(function (btn) {
+        btn.setAttribute('aria-expanded', open);
+        btn.nextElementSibling.classList.toggle('open', open);
+      });
+    });
+  });
+</script>
+</body>
+</html>
