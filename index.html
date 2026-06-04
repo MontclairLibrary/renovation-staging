@@ -410,6 +410,54 @@
   }
   .faq-group-title:first-of-type { margin-top: 0; }
 
+  /* ---------- Explorer (master-detail) ---------- */
+  .explorer {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--shadow);
+    margin-top: 18px;
+  }
+  .explorer-list {
+    background: #fafbfc;
+    border-right: 1px solid var(--line);
+    max-height: 540px;
+    overflow-y: auto;
+  }
+  .exp-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--line);
+    padding: 14px 18px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.94rem;
+    line-height: 1.35;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-item:hover { background: #fff; color: var(--brand); }
+  .exp-item.is-active { background: #fff; border-left-color: var(--brand); color: var(--brand); }
+  .explorer-detail { padding: 30px 32px; min-height: 340px; }
+  .exp-panel { display: none; }
+  .exp-panel.is-active { display: block; animation: accIn 0.3s var(--ease); }
+  .exp-panel h4 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0 0 14px; color: var(--ink); }
+  .exp-panel p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.7; }
+  @media (max-width: 760px) {
+    .explorer { grid-template-columns: 1fr; }
+    .explorer-list { border-right: none; border-bottom: 1px solid var(--line); max-height: 260px; }
+    .explorer-detail { min-height: 0; padding: 24px 22px; }
+  }
+
   /* ---------- Timeline ---------- */
   .timeline {
     display: grid;
@@ -672,78 +720,44 @@
       <div class="building-photo">Photo: Main Library exterior</div>
       <h3>Main Library, 50 S. Fullerton Avenue</h3>
       <p>The Main Library will undergo a full gut rehabilitation of all mechanical, electrical, and plumbing systems. Every floor will be rebuilt from the inside out. The building will be reorganized around new program spaces while retaining its collections and core library services.</p>
-      <div class="acc-controls">
-        <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
-        <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
-      </div>
-      <div class="accordion" data-accordion>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Teaching Kitchen and Cafe</span><span class="sign">+</span></button>
-          <div class="acc-panel">A fully equipped teaching kitchen and cafe designed to support cooking classes, cultural food demonstrations, nutrition education, and community meals. The space hosts instructor-led programs, hands-on workshops, and youth and adult classes, with flexible cafe seating for social interaction and everyday use. Food becomes a cultural medium here, letting participants explore global traditions, family heritage, and community storytelling through hands-on culinary arts, from culturally significant recipes to intergenerational cooking and food history. It treats cooking not simply as a practical skill but as a form of artistic expression and cultural learning accessible to all ages, with equipment such as an induction cooktop designed to seat roughly a dozen students safely at a time.</div>
+      <div class="explorer" data-explorer>
+        <div class="explorer-list" role="tablist" aria-label="Main Library spaces">
+          <button type="button" class="exp-item is-active" data-i="0">Teaching Kitchen and Cafe</button>
+          <button type="button" class="exp-item" data-i="1">Auditorium and Performance Space</button>
+          <button type="button" class="exp-item" data-i="2">Exhibition Gallery</button>
+          <button type="button" class="exp-item" data-i="3">Outdoor Mixed-Use Terrace</button>
+          <button type="button" class="exp-item" data-i="4">Outdoor Main Plaza</button>
+          <button type="button" class="exp-item" data-i="5">Adult FabLab</button>
+          <button type="button" class="exp-item" data-i="6">Flexible Classrooms</button>
+          <button type="button" class="exp-item" data-i="7">Digital Commons</button>
+          <button type="button" class="exp-item" data-i="8">Business Center</button>
+          <button type="button" class="exp-item" data-i="9">Quiet Work and Reading Room</button>
+          <button type="button" class="exp-item" data-i="10">Montclair Architectural History and Preservation Center</button>
+          <button type="button" class="exp-item" data-i="11">Jazz Library</button>
+          <button type="button" class="exp-item" data-i="12">Podcast, Music, and Media Studios</button>
+          <button type="button" class="exp-item" data-i="13">Teen Wing</button>
+          <button type="button" class="exp-item" data-i="14">Children's STEAM Discovery Lab</button>
+          <button type="button" class="exp-item" data-i="15">Children's Story and Activity Room</button>
+          <button type="button" class="exp-item" data-i="16">Sensory Room</button>
         </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Auditorium and Performance Space</span><span class="sign">+</span></button>
-          <div class="acc-panel">A purpose-built venue for live performances, author talks, film screenings, lectures, civic forums, and large public gatherings, with multiple staging formats and high-quality audiovisual presentation. As the library's signature cultural space, it anchors a broad range of arts and humanities programming, including literary events, musical performances, panel discussions, and community arts presentations. It serves as a central gathering place where residents experience cultural content, engage in civic dialogue, and share in artistic experiences. As the primary indoor performance venue in the facility, it is essential to delivering accessible, high-impact cultural programming.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Exhibition Gallery</span><span class="sign">+</span></button>
-          <div class="acc-panel">Gallery spaces for rotating exhibitions, presentations by local and regional artists, historical and archival displays, and community storytelling projects, with professional-quality installation for framed artworks, photography, interpretive panels, and mixed-media exhibits. It accommodates both curated shows and community-driven displays throughout the year, woven into the everyday experience of the library rather than cordoned off. The gallery gives residents direct access to artwork, historical narratives, and thematic exhibitions that reflect Montclair's diverse cultural identity, showcasing local artists, community history, and student work. By offering a public platform for visual expression and cultural storytelling, it strengthens community engagement with the arts.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Outdoor Mixed-Use Terrace</span><span class="sign">+</span></button>
-          <div class="acc-panel">An outdoor terrace built to host readings, acoustic music, art talks, small performances, workshops, and informal community gatherings, with seating, power access, lighting, and visibility to surrounding program spaces. It works both as a spillover area for indoor events and as a standalone venue for intimate outdoor programs across the year, supporting storytimes, yoga, seasonal classes, and poetry readings. The terrace extends the library's cultural programming into an accessible, comfortable open-air environment for those who prefer to participate outdoors. A durable, year-round canopy is envisioned so that rain is never a deterrent.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Outdoor Main Plaza</span><span class="sign">+</span></button>
-          <div class="acc-panel">A large, multi-use outdoor plaza designed to host festivals, concerts, author events, civic gatherings, performances, book fairs, and seasonal cultural celebrations, with flexible open space for stages, vendor setups, and audience seating. Rebuilt as an amphitheater and festival site, it functions as the Main Library's primary exterior event venue and as a public cultural square for events too large to hold indoors. It supports concerts, multicultural celebrations, literary festivals, arts markets, and community storytelling, making cultural participation visible and accessible to the entire neighborhood. The plaza reinforces the library's position as an inclusive cultural anchor in Montclair's downtown.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Adult FabLab</span><span class="sign">+</span></button>
-          <div class="acc-panel">A fully equipped makerspace for hands-on making, fabrication, digital design, prototyping, and creative technology instruction for adults. It includes workbenches, hand tools, 3D printers, laser cutters, CNC equipment, electronics stations, and design computers, plus shop-class woodworking equipment, supporting structured classes, open lab hours, and community-led projects. Modeled on full-service fabrication labs with a wood shop, vinyl cutter, resin and filament 3D printing, an electronics workbench, and a laser cutter, it gives residents access to tools that are typically unavailable or unaffordable for individuals. The lab doubles as a cultural production studio for sculpture, mixed-media work, printmaking, wearable art, and object-making, strengthening Montclair's creative economy and opening pathways into trades and emerging creative industries.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Flexible Classrooms</span><span class="sign">+</span></button>
-          <div class="acc-panel">Technology-enabled classrooms used by the Adult School of Montclair and community partners for courses, arts workshops, digital skills classes, and community learning, with flexible setups for instruction, small-group activities, and partner-led programs. They provide dedicated space for cultural education, including arts instruction, creative writing, digital media lessons, ESL, and humanities programming. The rooms expand the library's ability to offer accessible, structured cultural classes for residents of all ages.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Digital Commons</span><span class="sign">+</span></button>
-          <div class="acc-panel">A computer lab supporting digital literacy instruction, creative software access, research support, and computer-based learning, with computers, peripherals, and hands-on instruction for guided or independent use. It provides equitable access to digital arts tools, media-creation software, and research platforms that are essential to today's cultural and creative activities. The space supports digital art, graphic design, media editing, and other technology-based learning that directly contributes to cultural engagement, equipped with adaptive technology and bilingual capacity.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Business Center</span><span class="sign">+</span></button>
-          <div class="acc-panel">A public-facing production studio that supports printing, scanning, design work, exhibit preparation, document creation, and media finishing for patrons, artists, students, nonprofits, and community organizations. It offers advanced tools, including wide-format printing, high-speed scanning, binding, cutting, laminating, and design workstations, used to create posters, brochures, signage, portfolios, and materials for arts events and exhibitions. Community members can produce exhibit signage, event posters, program brochures, art prints, and interpretive materials, with production support for library-led exhibitions, public art initiatives, and community arts groups. Functioning as a micro production lab, it expands equitable access to professional creative and finishing equipment for small business owners, job seekers, and anyone who needs it.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Quiet Work and Reading Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">A silent room for reading, research, writing, and independent study in a distraction-free environment, with soft seating, laptop desks, natural light, and focused space for extended work. It supports sustained engagement with literature, humanities research, and individual creative work. By offering a dedicated quiet space, it lets patrons participate more fully in the cultural and intellectual life of the library, an alternative to commercial coworking spaces and crowded cafes.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Montclair Architectural History and Preservation Center</span><span class="sign">+</span></button>
-          <div class="acc-panel">A research space providing access to local history materials, architectural records, preservation documents, maps, drawings, and special collections, with study space and reference assistance focused on Montclair's built environment and community history. Built around the library's extensive deed collection, it preserves and provides access to the community's architectural and cultural heritage through documents, plans, photographs, and archival materials. A digital preservation lab supports digitization of historical collections, and residents can research the history of their homes and neighborhoods while engaging with materials that support exhibits, preservation efforts, and cultural learning.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Jazz Library</span><span class="sign">+</span></button>
-          <div class="acc-panel">A dedicated cultural space celebrating jazz as both a literary and listening experience, honoring one of Montclair's most significant artistic legacies. It houses a curated print collection of biographies, histories, criticism, and cultural analysis, and supports listening stations and digital access to recordings as the collection grows. Designed as an intimate environment for discovery and reflection, the room lets patrons explore jazz through reading, listening, research, and personal study. This hybrid literary-and-audio model supports music appreciation, cultural education, and intergenerational learning, strengthening the library's role as a steward of local creative heritage.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Podcast, Music, and Media Studios</span><span class="sign">+</span></button>
-          <div class="acc-panel">Sound-isolated studios equipped for podcasting, music recording, voice work, and digital media production, supporting both independent projects and instructor-led programs with recording tools, editing software, and a controlled environment for high-quality audio and video. They expand community access to creative media production, from podcasts and music to oral histories, interviews, and digital storytelling. Available to patrons of all ages, the studios support artistic expression, cultural documentation, and media education, helping residents produce original content and preserve community voices.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Teen Wing</span><span class="sign">+</span></button>
-          <div class="acc-panel">A vibrant teen cultural hub for reading, creative collaboration, digital media, gaming, group study, and youth-led activities, with flexible seating, collaboration tables, program zones, and technology for both independent use and structured programming. Intentionally designed as a safe, welcoming environment, it gives teens a place to gather after school, work on projects, attend workshops, and explore new interests. The wing centers youth expression and community identity across a full spectrum of arts engagement, from literary discovery and digital media creation to collaborative arts projects, writing clubs, and visual and performing arts workshops, all designed for and with Montclair's teenagers. By providing a cultural home for one of the most underserved age groups in public cultural spaces, it helps teens build confidence, find community, and engage with the arts in ways that are meaningful and developmentally responsive.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Children's STEAM Discovery Lab</span><span class="sign">+</span></button>
-          <div class="acc-panel">A hands-on workshop where children explore science, technology, engineering, art, and math through creative projects, guided discovery, and play-based learning. It is equipped with child-friendly robotics kits, simple circuits, building materials, digital devices, and artistic tools that support open-ended experimentation in both structured classes and drop-in learning. Children tinker, solve problems, create art, and collaborate, moving from early coding and digital design to crafting, storytelling, and engineering challenges. By embedding art directly into STEM learning, the lab helps children develop the creative confidence to become lifelong participants in the arts.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Children's Story and Activity Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">A flexible room for storytimes, children's performances, hands-on arts activities, and family programs, supporting both structured classes and informal learning for groups of children and caregivers. It provides a dedicated environment for early literacy, music and movement, storytelling, and family-centered arts programming. Young children engage with books, language, and creative expression in a developmentally appropriate setting, while families gain consistent access to cultural programs that build a foundation for lifelong participation in the arts.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Sensory Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">A quiet, controlled environment designed for neurodivergent children and adults who need reduced stimulation or sensory regulation, with soft lighting, textured materials, and acoustic privacy. It supports short breaks during visits, decompression before or after programs, and individualized use for patrons who benefit from a calming space. By providing a regulated place to reset and manage sensory input, the room removes barriers to participation in storytimes, performances, and workshops, ensuring that all community members can take part in arts, literacy, and educational programs.</div>
+        <div class="explorer-detail">
+          <div class="exp-panel is-active" data-i="0"><h4>Teaching Kitchen and Cafe</h4><p>A fully equipped teaching kitchen and cafe designed to support cooking classes, cultural food demonstrations, nutrition education, and community meals. The space hosts instructor-led programs, hands-on workshops, and youth and adult classes, with flexible cafe seating for social interaction and everyday use. Food becomes a cultural medium here, letting participants explore global traditions, family heritage, and community storytelling through hands-on culinary arts, from culturally significant recipes to intergenerational cooking and food history. It treats cooking not simply as a practical skill but as a form of artistic expression and cultural learning accessible to all ages, with equipment such as an induction cooktop designed to seat roughly a dozen students safely at a time.</p></div>
+          <div class="exp-panel" data-i="1"><h4>Auditorium and Performance Space</h4><p>A purpose-built venue for live performances, author talks, film screenings, lectures, civic forums, and large public gatherings, with multiple staging formats and high-quality audiovisual presentation. As the library's signature cultural space, it anchors a broad range of arts and humanities programming, including literary events, musical performances, panel discussions, and community arts presentations. It serves as a central gathering place where residents experience cultural content, engage in civic dialogue, and share in artistic experiences. As the primary indoor performance venue in the facility, it is essential to delivering accessible, high-impact cultural programming.</p></div>
+          <div class="exp-panel" data-i="2"><h4>Exhibition Gallery</h4><p>Gallery spaces for rotating exhibitions, presentations by local and regional artists, historical and archival displays, and community storytelling projects, with professional-quality installation for framed artworks, photography, interpretive panels, and mixed-media exhibits. It accommodates both curated shows and community-driven displays throughout the year, woven into the everyday experience of the library rather than cordoned off. The gallery gives residents direct access to artwork, historical narratives, and thematic exhibitions that reflect Montclair's diverse cultural identity, showcasing local artists, community history, and student work. By offering a public platform for visual expression and cultural storytelling, it strengthens community engagement with the arts.</p></div>
+          <div class="exp-panel" data-i="3"><h4>Outdoor Mixed-Use Terrace</h4><p>An outdoor terrace built to host readings, acoustic music, art talks, small performances, workshops, and informal community gatherings, with seating, power access, lighting, and visibility to surrounding program spaces. It works both as a spillover area for indoor events and as a standalone venue for intimate outdoor programs across the year, supporting storytimes, yoga, seasonal classes, and poetry readings. The terrace extends the library's cultural programming into an accessible, comfortable open-air environment for those who prefer to participate outdoors. A durable, year-round canopy is envisioned so that rain is never a deterrent.</p></div>
+          <div class="exp-panel" data-i="4"><h4>Outdoor Main Plaza</h4><p>A large, multi-use outdoor plaza designed to host festivals, concerts, author events, civic gatherings, performances, book fairs, and seasonal cultural celebrations, with flexible open space for stages, vendor setups, and audience seating. Rebuilt as an amphitheater and festival site, it functions as the Main Library's primary exterior event venue and as a public cultural square for events too large to hold indoors. It supports concerts, multicultural celebrations, literary festivals, arts markets, and community storytelling, making cultural participation visible and accessible to the entire neighborhood. The plaza reinforces the library's position as an inclusive cultural anchor in Montclair's downtown.</p></div>
+          <div class="exp-panel" data-i="5"><h4>Adult FabLab</h4><p>A fully equipped makerspace for hands-on making, fabrication, digital design, prototyping, and creative technology instruction for adults. It includes workbenches, hand tools, 3D printers, laser cutters, CNC equipment, electronics stations, and design computers, plus shop-class woodworking equipment, supporting structured classes, open lab hours, and community-led projects. Modeled on full-service fabrication labs with a wood shop, vinyl cutter, resin and filament 3D printing, an electronics workbench, and a laser cutter, it gives residents access to tools that are typically unavailable or unaffordable for individuals. The lab doubles as a cultural production studio for sculpture, mixed-media work, printmaking, wearable art, and object-making, strengthening Montclair's creative economy and opening pathways into trades and emerging creative industries.</p></div>
+          <div class="exp-panel" data-i="6"><h4>Flexible Classrooms</h4><p>Technology-enabled classrooms used by the Adult School of Montclair and community partners for courses, arts workshops, digital skills classes, and community learning, with flexible setups for instruction, small-group activities, and partner-led programs. They provide dedicated space for cultural education, including arts instruction, creative writing, digital media lessons, ESL, and humanities programming. The rooms expand the library's ability to offer accessible, structured cultural classes for residents of all ages.</p></div>
+          <div class="exp-panel" data-i="7"><h4>Digital Commons</h4><p>A computer lab supporting digital literacy instruction, creative software access, research support, and computer-based learning, with computers, peripherals, and hands-on instruction for guided or independent use. It provides equitable access to digital arts tools, media-creation software, and research platforms that are essential to today's cultural and creative activities. The space supports digital art, graphic design, media editing, and other technology-based learning that directly contributes to cultural engagement, equipped with adaptive technology and bilingual capacity.</p></div>
+          <div class="exp-panel" data-i="8"><h4>Business Center</h4><p>A public-facing production studio that supports printing, scanning, design work, exhibit preparation, document creation, and media finishing for patrons, artists, students, nonprofits, and community organizations. It offers advanced tools, including wide-format printing, high-speed scanning, binding, cutting, laminating, and design workstations, used to create posters, brochures, signage, portfolios, and materials for arts events and exhibitions. Community members can produce exhibit signage, event posters, program brochures, art prints, and interpretive materials, with production support for library-led exhibitions, public art initiatives, and community arts groups. Functioning as a micro production lab, it expands equitable access to professional creative and finishing equipment for small business owners, job seekers, and anyone who needs it.</p></div>
+          <div class="exp-panel" data-i="9"><h4>Quiet Work and Reading Room</h4><p>A silent room for reading, research, writing, and independent study in a distraction-free environment, with soft seating, laptop desks, natural light, and focused space for extended work. It supports sustained engagement with literature, humanities research, and individual creative work. By offering a dedicated quiet space, it lets patrons participate more fully in the cultural and intellectual life of the library, an alternative to commercial coworking spaces and crowded cafes.</p></div>
+          <div class="exp-panel" data-i="10"><h4>Montclair Architectural History and Preservation Center</h4><p>A research space providing access to local history materials, architectural records, preservation documents, maps, drawings, and special collections, with study space and reference assistance focused on Montclair's built environment and community history. Built around the library's extensive deed collection, it preserves and provides access to the community's architectural and cultural heritage through documents, plans, photographs, and archival materials. A digital preservation lab supports digitization of historical collections, and residents can research the history of their homes and neighborhoods while engaging with materials that support exhibits, preservation efforts, and cultural learning.</p></div>
+          <div class="exp-panel" data-i="11"><h4>Jazz Library</h4><p>A dedicated cultural space celebrating jazz as both a literary and listening experience, honoring one of Montclair's most significant artistic legacies. It houses a curated print collection of biographies, histories, criticism, and cultural analysis, and supports listening stations and digital access to recordings as the collection grows. Designed as an intimate environment for discovery and reflection, the room lets patrons explore jazz through reading, listening, research, and personal study. This hybrid literary-and-audio model supports music appreciation, cultural education, and intergenerational learning, strengthening the library's role as a steward of local creative heritage.</p></div>
+          <div class="exp-panel" data-i="12"><h4>Podcast, Music, and Media Studios</h4><p>Sound-isolated studios equipped for podcasting, music recording, voice work, and digital media production, supporting both independent projects and instructor-led programs with recording tools, editing software, and a controlled environment for high-quality audio and video. They expand community access to creative media production, from podcasts and music to oral histories, interviews, and digital storytelling. Available to patrons of all ages, the studios support artistic expression, cultural documentation, and media education, helping residents produce original content and preserve community voices.</p></div>
+          <div class="exp-panel" data-i="13"><h4>Teen Wing</h4><p>A vibrant teen cultural hub for reading, creative collaboration, digital media, gaming, group study, and youth-led activities, with flexible seating, collaboration tables, program zones, and technology for both independent use and structured programming. Intentionally designed as a safe, welcoming environment, it gives teens a place to gather after school, work on projects, attend workshops, and explore new interests. The wing centers youth expression and community identity across a full spectrum of arts engagement, from literary discovery and digital media creation to collaborative arts projects, writing clubs, and visual and performing arts workshops, all designed for and with Montclair's teenagers. By providing a cultural home for one of the most underserved age groups in public cultural spaces, it helps teens build confidence, find community, and engage with the arts in ways that are meaningful and developmentally responsive.</p></div>
+          <div class="exp-panel" data-i="14"><h4>Children's STEAM Discovery Lab</h4><p>A hands-on workshop where children explore science, technology, engineering, art, and math through creative projects, guided discovery, and play-based learning. It is equipped with child-friendly robotics kits, simple circuits, building materials, digital devices, and artistic tools that support open-ended experimentation in both structured classes and drop-in learning. Children tinker, solve problems, create art, and collaborate, moving from early coding and digital design to crafting, storytelling, and engineering challenges. By embedding art directly into STEM learning, the lab helps children develop the creative confidence to become lifelong participants in the arts.</p></div>
+          <div class="exp-panel" data-i="15"><h4>Children's Story and Activity Room</h4><p>A flexible room for storytimes, children's performances, hands-on arts activities, and family programs, supporting both structured classes and informal learning for groups of children and caregivers. It provides a dedicated environment for early literacy, music and movement, storytelling, and family-centered arts programming. Young children engage with books, language, and creative expression in a developmentally appropriate setting, while families gain consistent access to cultural programs that build a foundation for lifelong participation in the arts.</p></div>
+          <div class="exp-panel" data-i="16"><h4>Sensory Room</h4><p>A quiet, controlled environment designed for neurodivergent children and adults who need reduced stimulation or sensory regulation, with soft lighting, textured materials, and acoustic privacy. It supports short breaks during visits, decompression before or after programs, and individualized use for patrons who benefit from a calming space. By providing a regulated place to reset and manage sensory input, the room removes barriers to participation in storytimes, performances, and workshops, ensuring that all community members can take part in arts, literacy, and educational programs.</p></div>
         </div>
       </div>
     </div>
@@ -1066,6 +1080,22 @@
         btn.setAttribute('aria-expanded', open);
         btn.nextElementSibling.classList.toggle('open', open);
       });
+    });
+  });
+
+  // Explorer (master-detail): click a name to show its description
+  document.querySelectorAll('[data-explorer]').forEach(function (ex) {
+    var items = ex.querySelectorAll('.exp-item');
+    var panels = ex.querySelectorAll('.exp-panel');
+    ex.querySelector('.explorer-list').addEventListener('click', function (e) {
+      var btn = e.target.closest('.exp-item');
+      if (!btn) return;
+      var i = btn.getAttribute('data-i');
+      items.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      panels.forEach(function (p) { p.classList.toggle('is-active', p.getAttribute('data-i') === i); });
+      if (window.innerWidth <= 760) {
+        ex.querySelector('.explorer-detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     });
   });
 
