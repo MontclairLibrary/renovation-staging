@@ -507,6 +507,35 @@
   }
   .field-row input:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
 
+  /* Constant Contact form — nudge toward site style */
+  .ctct-inline-form { margin-top: 16px; }
+  .ctct-inline-form .ctct-form-defaults { background: transparent !important; padding: 0 !important; }
+  .ctct-inline-form .ctct-form-custom .ctct-form-element,
+  .ctct-inline-form input[type="text"],
+  .ctct-inline-form input[type="email"] {
+    border: 1px solid var(--line) !important;
+    border-radius: var(--radius) !important;
+    padding: 13px 14px !important;
+    font-size: 1rem !important;
+    font-family: var(--font-sans) !important;
+  }
+  .ctct-inline-form .ctct-form-button {
+    background: var(--brand) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: var(--radius) !important;
+    padding: 13px 24px !important;
+    font-weight: 600 !important;
+    font-size: 0.98rem !important;
+    font-family: var(--font-sans) !important;
+    cursor: pointer !important;
+  }
+  .ctct-inline-form .ctct-form-button:hover { background: var(--brand-dark) !important; }
+  .ctct-inline-form .ctct-form-header,
+  .ctct-inline-form .ctct-form-text,
+  .ctct-inline-form .ctct-form-label,
+  .ctct-inline-form p { font-family: var(--font-sans) !important; color: var(--ink-soft) !important; }
+
   /* ---------- Footer ---------- */
   footer {
     background: var(--bg-deep);
@@ -1007,10 +1036,9 @@
       <div class="signup-card">
         <h3>Stay Informed</h3>
         <p>Enter your email address to receive project updates directly.</p>
-        <form class="field-row" onsubmit="return false;">
-          <input type="email" placeholder="Email address" aria-label="Email address">
-          <button class="btn btn-primary" type="submit">Sign Up</button>
-        </form>
+        <!-- Begin Constant Contact Inline Form Code -->
+        <div class="ctct-inline-form" data-form-id="b5817da4-7c05-4a22-9f54-42914d75e9bd"></div>
+        <!-- End Constant Contact Inline Form Code -->
       </div>
     </div>
   </div>
@@ -1121,5 +1149,7 @@
     targets.forEach(function (el) { io.observe(el); });
   })();
 </script>
+<!-- Constant Contact sign-up form widget -->
+<script id="signupScript" src="https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js" async defer></script>
 </body>
 </html>
