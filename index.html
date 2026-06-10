@@ -515,11 +515,12 @@
   }
   .footer-cols {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 32px;
     padding-bottom: 28px;
     border-bottom: 1px solid rgba(255,255,255,0.12);
   }
+  @media (max-width: 760px) { .footer-cols { grid-template-columns: repeat(2, 1fr); } }
   .footer-col .flogo {
     border-radius: 6px;
     padding: 16px 18px;
@@ -1030,6 +1031,10 @@
       <div class="footer-col">
         <div class="flogo"><img src="Montclair-Township-Logo.png" alt="Township of Montclair"></div>
         <a href="https://www.montclairnjusa.org">montclairnjusa.org</a>
+      </div>
+      <div class="footer-col">
+        <div class="flogo"><a href="https://www.montclairnjusa.org/Government/Advisory-Committee-Boards-and-Commissions/Historic-Preservation-Commission" target="_blank" rel="noopener"><img src="hpc-logo.png" alt="Montclair Historic Preservation Commission"></a></div>
+        <a href="https://www.montclairnjusa.org/Government/Advisory-Committee-Boards-and-Commissions/Historic-Preservation-Commission" target="_blank" rel="noopener">Historic Preservation Commission</a>
       </div>
     </div>
     <div class="footer-bottom">
