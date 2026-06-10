@@ -514,9 +514,9 @@
   .ctct-inline-form input[type="text"],
   .ctct-inline-form input[type="email"] {
     border: 1px solid var(--line) !important;
-    border-radius: var(--radius) !important;
-    padding: 13px 14px !important;
-    font-size: 1rem !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 10px 12px !important;
+    font-size: 0.95rem !important;
     font-family: var(--font-sans) !important;
   }
   .ctct-inline-form .ctct-form-button {
@@ -535,6 +535,16 @@
   .ctct-inline-form .ctct-form-text,
   .ctct-inline-form .ctct-form-label,
   .ctct-inline-form p { font-family: var(--font-sans) !important; color: var(--ink-soft) !important; }
+  /* condense layout: name fields side by side, tighter spacing */
+  .ctct-inline-form *:has(> .ctct-form-field) { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+  .ctct-inline-form *:has(> .ctct-form-field) > * { flex: 1 1 100%; margin: 0 !important; }
+  .ctct-inline-form .ctct-form-field:has(input[name="first_name"]),
+  .ctct-inline-form .ctct-form-field:has(input[name="last_name"]) { flex: 1 1 calc(50% - 5px); }
+  .ctct-inline-form .ctct-form-field { margin: 0 !important; }
+  .ctct-inline-form .ctct-form-label { margin: 0 0 3px !important; line-height: 1.2 !important; font-size: 0.85rem !important; }
+  .ctct-inline-form .ctct-form-header { margin-bottom: 4px !important; }
+  .ctct-inline-form .ctct-form-text { margin: 0 0 6px !important; font-size: 0.9rem !important; }
+  .ctct-inline-form .ctct-form-button-container { margin-top: 4px !important; }
 
   /* ---------- Footer ---------- */
   footer {
