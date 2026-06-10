@@ -506,9 +506,11 @@
     font-size: 1rem;
   }
   .field-row input:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
-  /* JotForm embed */
-  .jotform-embed { margin-top: 16px; }
-  .jotform-embed iframe { width: 100% !important; border: none !important; }
+  /* Signup form (posts to JotForm) */
+  .signup-form { margin-top: 8px; }
+  .signup-form .field-row { margin-top: 10px; }
+  .signup-form .btn { margin-top: 14px; width: 100%; }
+  .signup-thanks { margin-top: 16px; padding: 14px 16px; background: rgba(0,48,96,0.06); border-radius: var(--radius); color: var(--ink); font-weight: 500; }
 
   /* ---------- Footer ---------- */
   footer {
@@ -1009,11 +1011,23 @@
       </div>
       <div class="signup-card">
         <h3>Stay Informed</h3>
-        <p>Enter your email address to receive project updates directly.</p>
-        <!-- JotForm embed: Stay Informed signup -->
-        <div class="jotform-embed">
-          <script type="text/javascript" src="https://form.jotform.com/jsform/261603839636060"></script>
-        </div>
+        <p>Enter your name and email to receive project updates directly.</p>
+        <!-- Custom-styled signup form that posts to JotForm (form 261603839636060) -->
+        <form id="signupForm" class="signup-form" action="https://submit.jotform.com/submit/261603839636060" method="POST" target="jotform_sink">
+          <div class="field-row">
+            <input type="text" name="q3_name[first]" placeholder="First name" aria-label="First name" required>
+            <input type="text" name="q3_name[last]" placeholder="Last name" aria-label="Last name" required>
+          </div>
+          <div class="field-row">
+            <input type="email" name="q4_email" placeholder="Email address" aria-label="Email address" required>
+          </div>
+          <input type="hidden" name="formID" value="261603839636060">
+          <input type="hidden" name="simple_spc" value="261603839636060">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+          <button class="btn btn-primary" type="submit">Sign Up</button>
+        </form>
+        <iframe name="jotform_sink" id="jotformSink" title="signup submission" style="display:none;"></iframe>
+        <p id="signupThanks" class="signup-thanks" style="display:none;">Thanks for signing up! You'll receive project updates by email.</p>
       </div>
     </div>
   </div>
@@ -1122,6 +1136,20 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+<script>
+  // Stay Informed signup: submit into hidden iframe, then show a thank-you message in place
+  (function () {
+    var form = document.getElementById('signupForm');
+    if (!form) return;
+    var sink = document.getElementById('jotformSink');
+    var thanks = document.getElementById('signupThanks');
+    var submitted = false;
+    form.addEventListener('submit', function () { submitted = true; });
+    sink.addEventListener('load', function () {
+      if (submitted) { form.style.display = 'none'; thanks.style.display = 'block'; }
+    });
   })();
 </script>
 </body>
