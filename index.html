@@ -506,45 +506,9 @@
     font-size: 1rem;
   }
   .field-row input:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
-
-  /* Constant Contact form — nudge toward site style */
-  .ctct-inline-form { margin-top: 16px; }
-  .ctct-inline-form .ctct-form-defaults { background: transparent !important; padding: 0 !important; }
-  .ctct-inline-form .ctct-form-custom .ctct-form-element,
-  .ctct-inline-form input[type="text"],
-  .ctct-inline-form input[type="email"] {
-    border: 1px solid var(--line) !important;
-    border-radius: var(--radius-sm) !important;
-    padding: 10px 12px !important;
-    font-size: 0.95rem !important;
-    font-family: var(--font-sans) !important;
-  }
-  .ctct-inline-form .ctct-form-button {
-    background: var(--brand) !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: var(--radius) !important;
-    padding: 13px 24px !important;
-    font-weight: 600 !important;
-    font-size: 0.98rem !important;
-    font-family: var(--font-sans) !important;
-    cursor: pointer !important;
-  }
-  .ctct-inline-form .ctct-form-button:hover { background: var(--brand-dark) !important; }
-  .ctct-inline-form .ctct-form-header,
-  .ctct-inline-form .ctct-form-text,
-  .ctct-inline-form .ctct-form-label,
-  .ctct-inline-form p { font-family: var(--font-sans) !important; color: var(--ink-soft) !important; }
-  /* condense layout: name fields side by side, tighter spacing */
-  .ctct-inline-form *:has(> .ctct-form-field) { display: flex; flex-wrap: wrap; gap: 8px 10px; }
-  .ctct-inline-form *:has(> .ctct-form-field) > * { flex: 1 1 100%; margin: 0 !important; }
-  .ctct-inline-form .ctct-form-field:has(input[name="first_name"]),
-  .ctct-inline-form .ctct-form-field:has(input[name="last_name"]) { flex: 1 1 calc(50% - 5px); }
-  .ctct-inline-form .ctct-form-field { margin: 0 !important; }
-  .ctct-inline-form .ctct-form-label { margin: 0 0 3px !important; line-height: 1.2 !important; font-size: 0.85rem !important; }
-  .ctct-inline-form .ctct-form-header { margin-bottom: 4px !important; }
-  .ctct-inline-form .ctct-form-text { margin: 0 0 6px !important; font-size: 0.9rem !important; }
-  .ctct-inline-form .ctct-form-button-container { margin-top: 4px !important; }
+  /* JotForm embed */
+  .jotform-embed { margin-top: 16px; }
+  .jotform-embed iframe { width: 100% !important; border: none !important; }
 
   /* ---------- Footer ---------- */
   footer {
@@ -1046,9 +1010,10 @@
       <div class="signup-card">
         <h3>Stay Informed</h3>
         <p>Enter your email address to receive project updates directly.</p>
-        <!-- Begin Constant Contact Inline Form Code -->
-        <div class="ctct-inline-form" data-form-id="b5817da4-7c05-4a22-9f54-42914d75e9bd"></div>
-        <!-- End Constant Contact Inline Form Code -->
+        <!-- JotForm embed: Stay Informed signup -->
+        <div class="jotform-embed">
+          <script type="text/javascript" src="https://form.jotform.com/jsform/261603839636060"></script>
+        </div>
       </div>
     </div>
   </div>
@@ -1159,9 +1124,5 @@
     targets.forEach(function (el) { io.observe(el); });
   })();
 </script>
-<!-- Begin Constant Contact Active Forms -->
-<script> var _ctct_m = "8517995a734e145bceb96bc3bf267fef"; </script>
-<script id="signupScript" src="https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js" async defer></script>
-<!-- End Constant Contact Active Forms -->
 </body>
 </html>
