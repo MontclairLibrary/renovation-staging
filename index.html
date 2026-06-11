@@ -375,6 +375,44 @@
   .fund-list ul { padding-left: 20px; color: var(--ink-soft); }
   .fund-list li { margin-bottom: 8px; }
 
+  /* ---------- Funding flow ---------- */
+  .fund-flow { max-width: 940px; margin: 0 auto 40px; }
+  .fund-flow-intro { text-align: center; color: var(--ink-soft); font-size: 1.05rem; margin: 0 auto 24px; max-width: 640px; }
+  .flow-phase { margin: 0 0 6px; }
+  .flow-phase-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 12px; text-align: center; }
+  .flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 10px; }
+  .flow-step { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--brand); border-radius: var(--radius); padding: 16px 14px; box-shadow: var(--shadow); text-align: center; }
+  .flow-step.fs-state { border-top-color: var(--c-green); }
+  .flow-step .fs-title { font-weight: 600; color: var(--brand); font-size: 0.98rem; margin: 0 0 5px; line-height: 1.25; }
+  .flow-step.fs-state .fs-title { color: var(--c-green); }
+  .flow-step .fs-sub { color: var(--ink-soft); font-size: 0.85rem; margin: 0; line-height: 1.35; }
+  .flow-arrow { flex: 0 0 auto; align-self: center; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
+  .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 10px 0; }
+  .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: var(--radius); padding: 24px 28px; box-shadow: var(--shadow); text-align: center; }
+  .flow-outcome .fo-num { font-family: var(--font-num); font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: #fff; }
+  .flow-outcome .fo-text { font-size: 1.02rem; line-height: 1.45; max-width: 470px; color: rgba(255,255,255,0.95); }
+  .flow-outcome .fo-text strong { color: #fff; }
+
+  /* ---------- What it is / what it isn't ---------- */
+  .myth { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 940px; margin: 0 auto 40px; }
+  .myth-col { border-radius: var(--radius); padding: 24px 26px; border: 1px solid var(--line); }
+  .myth-is { background: #eef5ef; border-color: #cfe2d3; }
+  .myth-isnt { background: #f6f3f2; border-color: #e6dcd8; }
+  .myth-col h4 { margin: 0 0 14px; font-size: 1.1rem; font-family: var(--font-display); }
+  .myth-is h4 { color: var(--c-green); }
+  .myth-isnt h4 { color: #9a4034; }
+  .myth-col ul { list-style: none; padding: 0; margin: 0; }
+  .myth-col li { position: relative; padding-left: 28px; margin-bottom: 13px; color: var(--ink); font-size: 0.96rem; line-height: 1.42; }
+  .myth-col li:last-child { margin-bottom: 0; }
+  .myth-col li::before { position: absolute; left: 0; top: 0; font-weight: 700; font-size: 1.02rem; }
+  .myth-is li::before { content: "\2713"; color: var(--c-green); }
+  .myth-isnt li::before { content: "\2715"; color: #b0503f; }
+  @media (max-width: 680px) {
+    .flow-steps { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .myth { grid-template-columns: 1fr; }
+  }
+
   /* ---------- Accordion ---------- */
   .building { margin-bottom: 48px; }
   .building-photo {
@@ -752,6 +790,61 @@
       <div class="stat"><span class="num">$36,661,719</span><span class="label">CAFE tax credit award</span></div>
       <div class="stat"><span class="num">$37,327,219</span><span class="label">Total project cost</span></div>
     </div>
+
+    <div class="fund-flow">
+      <p class="fund-flow-intro">Follow the money. Here is how a roughly $37 million project reaches Montclair for an estimated $8 million in local cost.</p>
+
+      <div class="flow-phase">
+        <p class="flow-phase-label">While it&rsquo;s being built</p>
+        <div class="flow-steps">
+          <div class="flow-step"><p class="fs-title">Township issues bonds</p><p class="fs-sub">Pays for construction up front</p></div>
+          <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="flow-step"><p class="fs-title">Both branches rebuilt</p><p class="fs-sub">Main Library and Bellevue</p></div>
+        </div>
+      </div>
+
+      <div class="flow-down" aria-hidden="true">&darr;</div>
+
+      <div class="flow-phase">
+        <p class="flow-phase-label">After it opens, over five years</p>
+        <div class="flow-steps">
+          <div class="flow-step fs-state"><p class="fs-title">State issues tax credits</p><p class="fs-sub">$36.6M, in five yearly installments</p></div>
+          <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="flow-step fs-state"><p class="fs-title">Credits sold for cash</p><p class="fs-sub">About 90&cent; per dollar</p></div>
+          <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+          <div class="flow-step fs-state"><p class="fs-title">Bonds paid down</p><p class="fs-sub">Using the sale proceeds</p></div>
+        </div>
+      </div>
+
+      <div class="flow-down" aria-hidden="true">&darr;</div>
+
+      <div class="flow-outcome">
+        <span class="fo-num">~$8 million</span>
+        <span class="fo-text">is what the Township pays on net for a roughly <strong>$37 million</strong> library. That is about <strong>$1</strong> in local funds for every <strong>$4</strong> in project value.</span>
+      </div>
+    </div>
+
+    <div class="myth">
+      <div class="myth-col myth-is">
+        <h4>What this is</h4>
+        <ul>
+          <li>State tax credits paying for most of a $37 million project.</li>
+          <li>A temporary Township bridge loan with a clear payback plan.</li>
+          <li>About $8 million in net local cost, and $5 million of that was already approved in 2025.</li>
+          <li>Tax credits sold to a company for cash, which then repays the bonds.</li>
+        </ul>
+      </div>
+      <div class="myth-col myth-isnt">
+        <h4>What this is not</h4>
+        <ul>
+          <li>$37 million of new local spending.</li>
+          <li>Permanent debt with no way to pay it back.</li>
+          <li>$8 million of brand new money on top of everything else.</li>
+          <li>A State check mailed to the library or the Township.</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="fund-list" style="margin:0 auto;">
       <p>Here is how the funding works in plain terms: the library receives the tax credits after construction is complete. To fund construction in the meantime, the Township of Montclair issues bonds. Those bonds are repaid using the proceeds from selling the tax credits, which are distributed over five years after the project is finished.</p>
       <p>For roughly every $1 the Township commits, Montclair gains about $4 in total project value: an approximately $37 million library for an estimated $8 million in local Township contribution.</p>
