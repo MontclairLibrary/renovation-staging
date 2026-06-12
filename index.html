@@ -380,17 +380,16 @@
   .fund-flow-intro { text-align: center; color: var(--ink-soft); font-size: 1.05rem; margin: 0 auto 24px; max-width: 640px; }
   .flow-phase { margin: 0 0 6px; }
   .flow-phase-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 12px; text-align: center; }
-  .flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 18px; }
-  .flow-step { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 22px 18px; box-shadow: 0 22px 38px -18px rgba(10,61,110,0.42), 0 4px 10px rgba(20,35,58,0.05); text-align: center; }
-  .flow-step.fs-state { box-shadow: 0 22px 38px -18px rgba(63,122,82,0.44), 0 4px 10px rgba(20,35,58,0.05); }
+  .flow-steps { display: flex; align-items: flex-start; justify-content: center; gap: 18px; }
+  .flow-col { flex: 1 1 0; min-width: 0; }
+  .flow-step { background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 22px 18px; box-shadow: 0 22px 38px -18px rgba(10,61,110,0.42), 0 4px 10px rgba(20,35,58,0.05); text-align: center; }
+  .flow-col.fs-state .flow-step { box-shadow: 0 22px 38px -18px rgba(63,122,82,0.44), 0 4px 10px rgba(20,35,58,0.05); }
   .flow-step .fs-title { font-weight: 600; color: var(--brand); font-size: 0.98rem; margin: 0 0 5px; line-height: 1.25; }
-  .flow-step.fs-state .fs-title { color: var(--c-green); }
+  .flow-col.fs-state .fs-title { color: var(--c-green); }
   .flow-step .fs-sub { color: var(--ink-soft); font-size: 0.85rem; margin: 0; line-height: 1.35; }
-  .flow-tags { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; margin-top: 14px; }
-  .pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
-  .pill + .pill::before { content: "\00B7"; margin: 0 9px; opacity: 0.55; font-weight: 700; }
-  .flow-step.fs-state .pill { color: #5f8268; }
-  .flow-arrow { flex: 0 0 auto; align-self: center; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
+  .flow-posted { text-align: center; margin: 13px 0 0; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(20,35,58,0.45); }
+  .flow-col.fs-state .flow-posted { color: rgba(63,122,82,0.72); }
+  .flow-arrow { flex: 0 0 auto; align-self: flex-start; margin-top: 33px; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
   .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 20px 0; }
   .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: 20px; padding: 26px 30px; box-shadow: 0 24px 40px -18px rgba(63,122,82,0.55), 0 4px 10px rgba(20,35,58,0.06); text-align: center; }
   .flow-outcome .fo-num { font-family: var(--font-num); font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: #fff; }
@@ -413,7 +412,7 @@
   .myth-isnt li::before { content: "\2715"; color: #b0503f; }
   @media (max-width: 680px) {
     .flow-steps { flex-direction: column; }
-    .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .flow-arrow { transform: rotate(90deg); padding: 4px 0; margin: 0; align-self: center; }
     .myth { grid-template-columns: 1fr; }
   }
 
@@ -815,9 +814,15 @@
       <div class="flow-phase">
         <p class="flow-phase-label">While it&rsquo;s being built</p>
         <div class="flow-steps">
-          <div class="flow-step"><p class="fs-title">Township issues bonds</p><p class="fs-sub">Pays for construction up front</p><div class="flow-tags"><span class="pill">Local</span><span class="pill">Temporary</span></div></div>
+          <div class="flow-col">
+            <div class="flow-step"><p class="fs-title">Township issues bonds</p><p class="fs-sub">Pays for construction up front</p></div>
+            <p class="flow-posted">Local &middot; Temporary</p>
+          </div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step"><p class="fs-title">Both branches rebuilt</p><p class="fs-sub">Main Library and Bellevue</p><div class="flow-tags"><span class="pill">Concurrent</span></div></div>
+          <div class="flow-col">
+            <div class="flow-step"><p class="fs-title">Both branches rebuilt</p><p class="fs-sub">Main Library and Bellevue</p></div>
+            <p class="flow-posted">Concurrent</p>
+          </div>
         </div>
       </div>
 
@@ -826,11 +831,20 @@
       <div class="flow-phase">
         <p class="flow-phase-label">After it opens, over five years</p>
         <div class="flow-steps">
-          <div class="flow-step fs-state"><p class="fs-title">State issues tax credits</p><p class="fs-sub">$36.6M, in five yearly installments</p><div class="flow-tags"><span class="pill">State funded</span></div></div>
+          <div class="flow-col fs-state">
+            <div class="flow-step"><p class="fs-title">State issues tax credits</p><p class="fs-sub">$36.6M, in five yearly installments</p></div>
+            <p class="flow-posted">State funded</p>
+          </div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step fs-state"><p class="fs-title">Credits sold for cash</p><p class="fs-sub">About 90&cent; per dollar</p><div class="flow-tags"><span class="pill">85&cent; floor</span></div></div>
+          <div class="flow-col fs-state">
+            <div class="flow-step"><p class="fs-title">Credits sold for cash</p><p class="fs-sub">About 90&cent; per dollar</p></div>
+            <p class="flow-posted">85&cent; floor</p>
+          </div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step fs-state"><p class="fs-title">Bonds paid down</p><p class="fs-sub">Using the sale proceeds</p><div class="flow-tags"><span class="pill">Over 5 years</span></div></div>
+          <div class="flow-col fs-state">
+            <div class="flow-step"><p class="fs-title">Bonds paid down</p><p class="fs-sub">Using the sale proceeds</p></div>
+            <p class="flow-posted">Over 5 years</p>
+          </div>
         </div>
       </div>
 
