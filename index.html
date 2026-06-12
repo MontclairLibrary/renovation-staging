@@ -413,6 +413,20 @@
     .myth { grid-template-columns: 1fr; }
   }
 
+  /* ---------- Funding sources ---------- */
+  .fund-sources { display: grid; grid-template-columns: 1.05fr 1fr; gap: 22px; max-width: 940px; margin: 0 auto; align-items: stretch; }
+  .fund-sources .fsg-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  .fs-state-src { background: #eef5ef; border: 1px solid #cfe2d3; border-radius: var(--radius); padding: 24px 26px; }
+  .fs-state-src .fsg-amount { font-family: var(--font-num); font-size: 2rem; font-weight: 700; color: var(--c-green); line-height: 1; letter-spacing: -0.02em; margin: 0 0 10px; }
+  .fs-state-src .fsg-note { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.45; margin: 0; }
+  .fs-local-src { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; }
+  .fs-local-src ul { list-style: none; padding: 0; margin: 0; }
+  .fs-local-src li { position: relative; padding-left: 18px; margin-bottom: 12px; color: var(--ink); font-size: 0.92rem; line-height: 1.45; }
+  .fs-local-src li:last-child { margin-bottom: 0; }
+  .fs-local-src li::before { content: ""; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+  .fs-local-src li strong { color: var(--brand); }
+  @media (max-width: 680px) { .fund-sources { grid-template-columns: 1fr; } }
+
   /* ---------- Accordion ---------- */
   .building { margin-bottom: 48px; }
   .building-photo {
@@ -845,16 +859,20 @@
       </div>
     </div>
 
-    <div class="fund-list" style="margin:0 auto;">
-      <p>Here is how the funding works in plain terms: the library receives the tax credits after construction is complete. To fund construction in the meantime, the Township of Montclair issues bonds. Those bonds are repaid using the proceeds from selling the tax credits, which are distributed over five years after the project is finished.</p>
-      <p>For roughly every $1 the Township commits, Montclair gains about $4 in total project value: an approximately $37 million library for an estimated $8 million in local Township contribution.</p>
-      <p><strong>Funding sources:</strong></p>
-      <ul>
-        <li>CAFE tax credit award: $36,661,719 (NJEDA). The actual cash value will be roughly 10% lower, because tax credits are sold at a discount to convert them into usable funds.</li>
-        <li>Township of Montclair 2025 bond authorization: $5,000,000 (already approved, unspent)</li>
-        <li>Montclair Public Library Foundation capital campaign</li>
-        <li>Township additional bond issuance to cover the remaining gap (to be finalized with bond counsel). This gap also includes the cost of debt service on the bonds, which is not yet known.</li>
-      </ul>
+    <div class="fund-sources">
+      <div class="fs-state-src">
+        <p class="fsg-label">From the State of New Jersey</p>
+        <p class="fsg-amount">$36,661,719</p>
+        <p class="fsg-note">CAFE tax credit award (NJEDA). The usable cash is roughly 10% lower, because the credits are sold at a discount to convert them into funds.</p>
+      </div>
+      <div class="fs-local-src">
+        <p class="fsg-label">Local share that fills the gap</p>
+        <ul>
+          <li><strong>$5,000,000</strong> Township 2025 bond authorization, already approved and unspent.</li>
+          <li>Montclair Public Library Foundation capital campaign.</li>
+          <li>Additional Township bonds for the remaining gap, to be finalized with bond counsel. This also covers debt service on the bonds, which is not yet known.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
