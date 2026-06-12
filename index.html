@@ -398,9 +398,9 @@
 
   /* ---------- What it is / what it isn't ---------- */
   .myth { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 940px; margin: 0 auto 40px; }
-  .myth-col { border-radius: 20px; padding: 26px 28px; border: 1px solid var(--line); }
-  .myth-is { background: #eef5ef; border-color: #cfe2d3; }
-  .myth-isnt { background: #f6f3f2; border-color: #e6dcd8; }
+  .myth-col { background: #fff; border-radius: var(--radius); padding: 24px 26px; border: 1px solid var(--line); }
+  .myth-is { box-shadow: inset 4px 0 0 var(--c-green), var(--shadow); }
+  .myth-isnt { box-shadow: inset 4px 0 0 #c2553f, var(--shadow); }
   .myth-col h4 { margin: 0 0 14px; font-size: 1.1rem; font-family: var(--font-display); }
   .myth-is h4 { color: var(--c-green); }
   .myth-isnt h4 { color: #9a4034; }
@@ -419,10 +419,10 @@
   /* ---------- Funding sources ---------- */
   .fund-sources { display: grid; grid-template-columns: 1.05fr 1fr; gap: 22px; max-width: 940px; margin: 0 auto; align-items: stretch; }
   .fund-sources .fsg-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
-  .fs-state-src { background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 26px 28px; box-shadow: 0 22px 38px -18px rgba(63,122,82,0.44), 0 4px 10px rgba(20,35,58,0.05); }
+  .fs-state-src { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; box-shadow: inset 4px 0 0 var(--c-green), var(--shadow); }
   .fs-state-src .fsg-amount { font-family: var(--font-num); font-size: 2rem; font-weight: 700; color: var(--c-green); line-height: 1; letter-spacing: -0.02em; margin: 0 0 10px; }
   .fs-state-src .fsg-note { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.45; margin: 0; }
-  .fs-local-src { background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 26px 28px; box-shadow: 0 22px 38px -18px rgba(10,61,110,0.40), 0 4px 10px rgba(20,35,58,0.05); }
+  .fs-local-src { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 26px; box-shadow: inset 4px 0 0 var(--brand), var(--shadow); }
   .fs-local-src ul { list-style: none; padding: 0; margin: 0; }
   .fs-local-src li { position: relative; padding-left: 18px; margin-bottom: 12px; color: var(--ink); font-size: 0.92rem; line-height: 1.45; }
   .fs-local-src li:last-child { margin-bottom: 0; }
