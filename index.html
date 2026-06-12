@@ -380,22 +380,22 @@
   .fund-flow-intro { text-align: center; color: var(--ink-soft); font-size: 1.05rem; margin: 0 auto 24px; max-width: 640px; }
   .flow-phase { margin: 0 0 6px; }
   .flow-phase-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 12px; text-align: center; }
-  .flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 10px; }
-  .flow-step { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--brand); border-radius: var(--radius); padding: 16px 14px; box-shadow: var(--shadow); text-align: center; }
-  .flow-step.fs-state { border-top-color: var(--c-green); }
+  .flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 18px; }
+  .flow-step { flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 22px 18px; box-shadow: 0 22px 38px -18px rgba(10,61,110,0.42), 0 4px 10px rgba(20,35,58,0.05); text-align: center; }
+  .flow-step.fs-state { box-shadow: 0 22px 38px -18px rgba(63,122,82,0.44), 0 4px 10px rgba(20,35,58,0.05); }
   .flow-step .fs-title { font-weight: 600; color: var(--brand); font-size: 0.98rem; margin: 0 0 5px; line-height: 1.25; }
   .flow-step.fs-state .fs-title { color: var(--c-green); }
   .flow-step .fs-sub { color: var(--ink-soft); font-size: 0.85rem; margin: 0; line-height: 1.35; }
   .flow-arrow { flex: 0 0 auto; align-self: center; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
-  .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 10px 0; }
-  .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: var(--radius); padding: 24px 28px; box-shadow: var(--shadow); text-align: center; }
+  .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 20px 0; }
+  .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: 20px; padding: 26px 30px; box-shadow: 0 24px 40px -18px rgba(63,122,82,0.55), 0 4px 10px rgba(20,35,58,0.06); text-align: center; }
   .flow-outcome .fo-num { font-family: var(--font-num); font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: #fff; }
   .flow-outcome .fo-text { font-size: 1.02rem; line-height: 1.45; max-width: 470px; color: rgba(255,255,255,0.95); }
   .flow-outcome .fo-text strong { color: #fff; }
 
   /* ---------- What it is / what it isn't ---------- */
   .myth { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 940px; margin: 0 auto 40px; }
-  .myth-col { border-radius: var(--radius); padding: 24px 26px; border: 1px solid var(--line); }
+  .myth-col { border-radius: 20px; padding: 26px 28px; border: 1px solid var(--line); }
   .myth-is { background: #eef5ef; border-color: #cfe2d3; }
   .myth-isnt { background: #f6f3f2; border-color: #e6dcd8; }
   .myth-col h4 { margin: 0 0 14px; font-size: 1.1rem; font-family: var(--font-display); }
@@ -416,10 +416,10 @@
   /* ---------- Funding sources ---------- */
   .fund-sources { display: grid; grid-template-columns: 1.05fr 1fr; gap: 22px; max-width: 940px; margin: 0 auto; align-items: stretch; }
   .fund-sources .fsg-label { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
-  .fs-state-src { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--c-green); border-radius: var(--radius); padding: 22px 26px; }
+  .fs-state-src { background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 26px 28px; box-shadow: 0 22px 38px -18px rgba(63,122,82,0.44), 0 4px 10px rgba(20,35,58,0.05); }
   .fs-state-src .fsg-amount { font-family: var(--font-num); font-size: 2rem; font-weight: 700; color: var(--c-green); line-height: 1; letter-spacing: -0.02em; margin: 0 0 10px; }
   .fs-state-src .fsg-note { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.45; margin: 0; }
-  .fs-local-src { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--brand); border-radius: var(--radius); padding: 22px 26px; }
+  .fs-local-src { background: #fff; border: 1px solid rgba(20,35,58,0.05); border-radius: 20px; padding: 26px 28px; box-shadow: 0 22px 38px -18px rgba(10,61,110,0.40), 0 4px 10px rgba(20,35,58,0.05); }
   .fs-local-src ul { list-style: none; padding: 0; margin: 0; }
   .fs-local-src li { position: relative; padding-left: 18px; margin-bottom: 12px; color: var(--ink); font-size: 0.92rem; line-height: 1.45; }
   .fs-local-src li:last-child { margin-bottom: 0; }
