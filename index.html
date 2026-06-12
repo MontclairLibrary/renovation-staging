@@ -386,6 +386,9 @@
   .flow-step .fs-title { font-weight: 600; color: var(--brand); font-size: 0.98rem; margin: 0 0 5px; line-height: 1.25; }
   .flow-step.fs-state .fs-title { color: var(--c-green); }
   .flow-step .fs-sub { color: var(--ink-soft); font-size: 0.85rem; margin: 0; line-height: 1.35; }
+  .flow-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 12px; }
+  .pill { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--brand); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; line-height: 1; white-space: nowrap; }
+  .flow-step.fs-state .pill { color: var(--c-green); }
   .flow-arrow { flex: 0 0 auto; align-self: center; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
   .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 20px 0; }
   .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: 20px; padding: 26px 30px; box-shadow: 0 24px 40px -18px rgba(63,122,82,0.55), 0 4px 10px rgba(20,35,58,0.06); text-align: center; }
@@ -811,9 +814,9 @@
       <div class="flow-phase">
         <p class="flow-phase-label">While it&rsquo;s being built</p>
         <div class="flow-steps">
-          <div class="flow-step"><p class="fs-title">Township issues bonds</p><p class="fs-sub">Pays for construction up front</p></div>
+          <div class="flow-step"><p class="fs-title">Township issues bonds</p><p class="fs-sub">Pays for construction up front</p><div class="flow-tags"><span class="pill">Local</span><span class="pill">Temporary</span></div></div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step"><p class="fs-title">Both branches rebuilt</p><p class="fs-sub">Main Library and Bellevue</p></div>
+          <div class="flow-step"><p class="fs-title">Both branches rebuilt</p><p class="fs-sub">Main Library and Bellevue</p><div class="flow-tags"><span class="pill">Concurrent</span></div></div>
         </div>
       </div>
 
@@ -822,11 +825,11 @@
       <div class="flow-phase">
         <p class="flow-phase-label">After it opens, over five years</p>
         <div class="flow-steps">
-          <div class="flow-step fs-state"><p class="fs-title">State issues tax credits</p><p class="fs-sub">$36.6M, in five yearly installments</p></div>
+          <div class="flow-step fs-state"><p class="fs-title">State issues tax credits</p><p class="fs-sub">$36.6M, in five yearly installments</p><div class="flow-tags"><span class="pill">State funded</span></div></div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step fs-state"><p class="fs-title">Credits sold for cash</p><p class="fs-sub">About 90&cent; per dollar</p></div>
+          <div class="flow-step fs-state"><p class="fs-title">Credits sold for cash</p><p class="fs-sub">About 90&cent; per dollar</p><div class="flow-tags"><span class="pill">85&cent; floor</span></div></div>
           <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-          <div class="flow-step fs-state"><p class="fs-title">Bonds paid down</p><p class="fs-sub">Using the sale proceeds</p></div>
+          <div class="flow-step fs-state"><p class="fs-title">Bonds paid down</p><p class="fs-sub">Using the sale proceeds</p><div class="flow-tags"><span class="pill">Over 5 years</span></div></div>
         </div>
       </div>
 
