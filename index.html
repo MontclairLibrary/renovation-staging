@@ -386,9 +386,10 @@
   .flow-step .fs-title { font-weight: 600; color: var(--brand); font-size: 0.98rem; margin: 0 0 5px; line-height: 1.25; }
   .flow-step.fs-state .fs-title { color: var(--c-green); }
   .flow-step .fs-sub { color: var(--ink-soft); font-size: 0.85rem; margin: 0; line-height: 1.35; }
-  .flow-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 12px; }
-  .pill { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--brand); background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; line-height: 1; white-space: nowrap; }
-  .flow-step.fs-state .pill { color: var(--c-green); }
+  .flow-tags { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; margin-top: 14px; }
+  .pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+  .pill + .pill::before { content: "\00B7"; margin: 0 9px; opacity: 0.55; font-weight: 700; }
+  .flow-step.fs-state .pill { color: #5f8268; }
   .flow-arrow { flex: 0 0 auto; align-self: center; color: var(--accent-dark); font-size: 1.25rem; font-weight: 700; line-height: 1; }
   .flow-down { text-align: center; color: var(--accent-dark); font-size: 1.5rem; font-weight: 700; line-height: 1; margin: 20px 0; }
   .flow-outcome { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; background: var(--c-green); color: #fff; border-radius: 20px; padding: 26px 30px; box-shadow: 0 24px 40px -18px rgba(63,122,82,0.55), 0 4px 10px rgba(20,35,58,0.06); text-align: center; }
