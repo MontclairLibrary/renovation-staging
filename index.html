@@ -660,7 +660,7 @@
   .voices .cloud { display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; align-content: center; }
   .voices .q {
     width: var(--w); border-radius: 13px; padding: 8px 12px; background: var(--tgbg);
-    cursor: default; position: relative; opacity: 0;
+    cursor: pointer; position: relative; opacity: 0;
     animation: voices-fade .5s ease forwards; animation-delay: var(--fin, 0s);
     box-shadow: 0 1px 2px rgba(10, 30, 60, .06);
     transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
@@ -668,7 +668,11 @@
   .voices .q::after { content: ""; position: absolute; left: 16px; bottom: -6px; width: 12px; height: 12px; background: inherit; border-radius: 0 0 3px 0; transform: rotate(45deg); }
   .voices .q .inner { animation: voices-float var(--fdur, 8s) ease-in-out infinite; animation-delay: var(--fdelay, 0s); }
   .voices .q p { font-family: var(--font-display); margin: 0; color: var(--tx); font-size: var(--fs); line-height: 1.32; }
-  .voices .q:hover, .voices .q:focus { outline: none; transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
+  .voices .q.is-open { outline: none; transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
+  @media (hover: hover) {
+    .voices .q:hover { transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
+  }
+  .voices .q:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
   .voices .q.xl { --w: 212px; --fs: 13px;   --sc: 1.7; }
   .voices .q.lg { --w: 172px; --fs: 11.5px; --sc: 1.95; }
   .voices .q.md { --w: 142px; --fs: 10px;   --sc: 2.15; }
@@ -1210,6 +1214,12 @@
     const oy = cy<H*0.30?'top':cy>H*0.70?'bottom':'center';
     el.style.transformOrigin=ox+' '+oy;
   }
+  function closeAll(){ cloud.querySelectorAll('.q.is-open').forEach(o=>o.classList.remove('is-open')); }
+  function toggleOpen(d){
+    const open=d.classList.contains('is-open');
+    closeAll();
+    if(!open){ setOrigin(d); d.classList.add('is-open'); }
+  }
   function render(list){
     cloud.innerHTML='';
     list.forEach((q,i)=>{
@@ -1225,10 +1235,15 @@
       d.innerHTML='<div class="inner"><p>“'+q.x+'”</p></div>';
       d.addEventListener('mouseenter',()=>setOrigin(d));
       d.addEventListener('focus',()=>setOrigin(d));
+      d.addEventListener('click',()=>toggleOpen(d));
+      d.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleOpen(d); } });
       cloud.appendChild(d);
     });
   }
   render(shuffle(QUOTES.slice()));
+
+  document.addEventListener('click',e=>{ const b=e.target.closest('.q'); if(!b||!cloud.contains(b)) closeAll(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeAll(); });
 
   let active='all';
   function applyFilter(key){
