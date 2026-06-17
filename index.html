@@ -661,14 +661,14 @@
 
   /* ---------- In their own words (quote cloud) ---------- */
   .voices .filters { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 0 0 22px; }
-  .voices .chip { border: 1px solid var(--line); background: #fff; color: var(--ink); font-family: var(--font-sans); font-size: 12px; padding: 5px 11px; border-radius: 999px; cursor: pointer; transition: all .15s ease; white-space: nowrap; }
+  .voices .chip { border: 1px solid var(--line); background: #fff; color: var(--ink); font-family: var(--font-sans); font-size: 14px; padding: 7px 15px; border-radius: 999px; cursor: pointer; transition: all .15s ease; white-space: nowrap; }
   .voices .chip:hover { border-color: #b9c4d2; }
   .voices .chip.active { background: var(--brand); color: #fff; border-color: var(--brand); }
-  .voices .chip .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .voices .chip .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
   .voices .chip.shuffle { background: var(--accent); border-color: var(--accent-dark); color: var(--accent-ink); font-weight: 600; }
-  .voices .cloud { display: flex; flex-wrap: wrap; gap: 11px; justify-content: center; align-content: center; }
+  .voices .cloud { display: flex; flex-wrap: wrap; gap: 13px; justify-content: center; align-content: center; }
   .voices .q {
-    width: var(--w); border-radius: 13px; padding: 8px 12px; background: var(--tgbg);
+    width: var(--w); border-radius: 14px; padding: 10px 14px; background: var(--tgbg);
     cursor: pointer; position: relative; opacity: 0;
     animation: voices-fade .5s ease forwards; animation-delay: var(--fin, 0s);
     box-shadow: 0 1px 2px rgba(10, 30, 60, .06);
@@ -679,10 +679,10 @@
   .voices .q p { font-family: var(--font-display); margin: 0; color: var(--tx); font-size: var(--fs); line-height: 1.32; }
   .voices .q.is-open, .voices .q.is-hover { outline: none; transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
   .voices .q:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-  .voices .q.xl { --w: 212px; --fs: 13px;   --sc: 1.7; }
-  .voices .q.lg { --w: 172px; --fs: 11.5px; --sc: 1.95; }
-  .voices .q.md { --w: 142px; --fs: 10px;   --sc: 2.15; }
-  .voices .q.sm { --w: 116px; --fs: 9px;    --sc: 2.4; }
+  .voices .q.xl { --w: 256px; --fs: 16.5px; --sc: 1.5; }
+  .voices .q.lg { --w: 212px; --fs: 14.5px; --sc: 1.65; }
+  .voices .q.md { --w: 176px; --fs: 12.5px; --sc: 1.85; }
+  .voices .q.sm { --w: 146px; --fs: 11px;   --sc: 2.05; }
   .voices .q.hide { display: none; }
   .voices .voices-foot { text-align: center; color: var(--ink-soft); font-size: 12px; margin: 22px 0 0; }
   @keyframes voices-fade { to { opacity: 1; } }
