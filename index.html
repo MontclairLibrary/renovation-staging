@@ -795,160 +795,6 @@
   </div>
 </section>
 
-<!-- ===== IN THEIR OWN WORDS (quote cloud) ===== -->
-<section id="voices" class="voices">
-  <div class="wrap">
-    <div class="section-head section-head--wide">
-      <h2 id="voices-title">In their own words</h2>
-      <p>What residents want from their library, verbatim from 568 survey responses. Hover or tap any quote to read it.</p>
-    </div>
-    <div class="filters" id="voicesFilters"></div>
-    <div class="cloud" id="voicesCloud" role="list" aria-labelledby="voices-title"></div>
-    <p class="voices-foot">Real resident responses, lightly trimmed &middot; Facilities Survey 2025</p>
-  </div>
-</section>
-<script>
-(function () {
-  const THEMES = {
-    community:{label:"Community & gathering", bd:"#0a3d6e", bg:"#e7eef5", tx:"#0a3d6e"},
-    cafe:{label:"Café & food", bd:"#b85a2e", bg:"#f7e7dd", tx:"#7d3a1a"},
-    comfort:{label:"Comfort & vibe", bd:"#d99a00", bg:"#fbf0cf", tx:"#6b4e00"},
-    youth:{label:"Teens & kids", bd:"#6a4a86", bg:"#efe8f4", tx:"#4f3566"},
-    maker:{label:"Maker & STEAM", bd:"#3f7a52", bg:"#e4f0e7", tx:"#2c5a3b"},
-    outdoor:{label:"Outdoor & terrace", bd:"#2f7d77", bg:"#e0f0ee", tx:"#1f5854"},
-    access:{label:"Accessibility", bd:"#1f6aa8", bg:"#e6f1fb", tx:"#134b78"},
-    reading:{label:"Reading & browsing", bd:"#8a6d3b", bg:"#f1ebdd", tx:"#5e4a26"},
-    culture:{label:"Performances & art", bd:"#c0392b", bg:"#f9e4e1", tx:"#8f2a20"}
-  };
-  const QUOTES = [
-    {t:"community",s:"xl",x:"Our libraries should be civic centers, not just for books."},
-    {t:"community",s:"xl",x:"A vibrant third place where parents can bring their kids."},
-    {t:"community",s:"md",x:"Bring people together — not to make money or get likes — but because it is core to your mission."},
-    {t:"community",s:"md",x:"Other than books, being a community gathering space is the most important function."},
-    {t:"community",s:"lg",x:"Programs and space to create more community — a monthly ‘salon’ for sharing ideas, music, poetry, and conversation."},
-    {t:"community",s:"sm",x:"Intergenerational events that encourage social connection and community."},
-    {t:"community",s:"sm",x:"I'd love if the library became a drawing point for unity in the community."},
-    {t:"community",s:"sm",x:"Keep the community rooms for mental-health outreach and community-led initiatives."},
-
-    {t:"cafe",s:"xl",x:"Please fill the café space with quality coffee and sandwiches… a social hub!"},
-    {t:"cafe",s:"md",x:"A small, simple café — so people could meet a friend for coffee before or after programs."},
-    {t:"cafe",s:"lg",x:"A comfortable lounge with couches near the café, where people can sit, read, gather, and work."},
-    {t:"cafe",s:"sm",x:"Bring back the café in a way that supports and employs people of the community."},
-    {t:"cafe",s:"sm",x:"Cooking classes and a coffee shop for informal gatherings."},
-    {t:"cafe",s:"sm",x:"If you could do a café, that would attract more people."},
-    {t:"cafe",s:"md",x:"Coffee, comfortable couches, quiet nooks and tables."},
-
-    {t:"comfort",s:"xl",x:"Create a space the entire community is proud of — beautiful light, comfortable seating, real art, outdoor spaces."},
-    {t:"comfort",s:"md",x:"Coffee-house vibes with comfy seats. A place for parents and kids to be together that's enjoyable for both."},
-    {t:"comfort",s:"md",x:"Lots of natural lighting and natural elements — plants, greenery, water features, natural wood."},
-    {t:"comfort",s:"lg",x:"If there were areas that felt specifically meant for reading… the more comfortable and welcoming, the better."},
-    {t:"comfort",s:"sm",x:"Books and coffee and studying and community go so well together!"},
-    {t:"comfort",s:"sm",x:"Cozy, comfy chairs in quiet, comfortable spaces."},
-    {t:"comfort",s:"sm",x:"Make it like a comfortable coffee shop."},
-    {t:"comfort",s:"sm",x:"A welcoming reading area near the front door, with comfortable chairs."},
-
-    {t:"youth",s:"xl",x:"There are so few spaces for teens to hang out in town. Could we make one they actually want to go to?"},
-    {t:"youth",s:"md",x:"Teens need thoughtful, relevant and safe spaces, activities and academic support."},
-    {t:"youth",s:"lg",x:"A teen room teens were actually using — gaming stations, a social space with a small stage, and access to the outside."},
-    {t:"youth",s:"md",x:"More for families with little kids and with tweens and teens, to do together after school."},
-    {t:"youth",s:"sm",x:"Teenagers would really appreciate more room dedicated just for them."},
-    {t:"youth",s:"sm",x:"A safe, cool space for tween and teen girls to hang out — there are so few places."},
-    {t:"youth",s:"sm",x:"Children's spaces should have lots of natural light."},
-
-    {t:"maker",s:"xl",x:"Wonderful maker spaces where kids and adults can experiment with 3D printing, robotics, and coding."},
-    {t:"maker",s:"md",x:"A dedicated STEM area where kids can do hands-on experiments, coding, and group projects."},
-    {t:"maker",s:"lg",x:"If there were a maker space, our household would provide equipment — sewing machines, 3D printers, looms, leatherworking tools."},
-    {t:"maker",s:"sm",x:"Experiential classes: cooking, 3D printing, chess, woodworking."},
-    {t:"maker",s:"sm",x:"More trades and hands-on courses such as woodworking."},
-    {t:"maker",s:"sm",x:"Maker events for adults, not just teens."},
-    {t:"maker",s:"sm",x:"A music room — both for recording digitally and for playing."},
-
-    {t:"outdoor",s:"lg",x:"A beautiful terrace on the third floor facing the City, with a seasonal café — a wonderful community spot."},
-    {t:"outdoor",s:"md",x:"A gorgeous roof terrace and garden all can enjoy — and a possible event space, too."},
-    {t:"outdoor",s:"md",x:"A water feature on an outdoor reading area — so nice to read beside the sound of running water."},
-    {t:"outdoor",s:"sm",x:"Could you do outdoor films in the plaza?"},
-    {t:"outdoor",s:"sm",x:"Loved the outdoor storytimes — would love more in nice weather."},
-    {t:"outdoor",s:"sm",x:"Convert the outdoor space into a community-inviting, multipurpose space."},
-
-    {t:"access",s:"xl",x:"Handicap access is desperately needed at the Bellevue Ave branch."},
-    {t:"access",s:"md",x:"So many older people live nearby, and the stairs are too difficult. Easy access is important."},
-    {t:"access",s:"sm",x:"Elevator or ramp access would be nice for strollers."},
-    {t:"access",s:"sm",x:"I love the old building… just updated for ADA and wheelchair access!"},
-    {t:"access",s:"md",x:"Restore the historic integrity of this beautiful building, with contemporary technology and sustainability."},
-
-    {t:"reading",s:"md",x:"More sections where librarians curate and highlight things, like at a bookstore — browsing is more fun."},
-    {t:"reading",s:"sm",x:"More inviting displays of books. More of a bookstore vibe."},
-    {t:"reading",s:"sm",x:"Genre-based sections for easier browsing, with reading pods and adjustable lighting."},
-    {t:"reading",s:"sm",x:"Clear graphic maps showing what can be found where."},
-    {t:"reading",s:"lg",x:"A quiet space where there's silence so patrons can work — private study rooms, with options for small groups."},
-    {t:"reading",s:"sm",x:"More college-like study spaces — a private room to hunker down and work."},
-
-    {t:"culture",s:"md",x:"Small theater and music productions and art exhibits — a way to deepen partnerships with our schools."},
-    {t:"culture",s:"sm",x:"An auditorium with graduated seating rather than a flat floor."},
-    {t:"culture",s:"sm",x:"Dedicated gallery space for art — not a hallway."},
-    {t:"culture",s:"sm",x:"Live theater, concerts by local groups, and lectures by leaders in their field."},
-
-    {t:"community",s:"xl",x:"Montclair deserves a great library."},
-    {t:"comfort",s:"sm",x:"I like where we are going!"},
-    {t:"community",s:"sm",x:"These ideas are all so cool — I want to see them all happen."}
-  ];
-
-  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-
-  const cloud = document.getElementById('voicesCloud');
-  const filters = document.getElementById('voicesFilters');
-  if (!cloud || !filters) return;
-
-  function setOrigin(el){
-    const r=el.getBoundingClientRect(), W=innerWidth, H=innerHeight;
-    const cx=r.left+r.width/2, cy=r.top+r.height/2;
-    const ox = cx<W*0.30?'left':cx>W*0.70?'right':'center';
-    const oy = cy<H*0.30?'top':cy>H*0.70?'bottom':'center';
-    el.style.transformOrigin=ox+' '+oy;
-  }
-  function render(list){
-    cloud.innerHTML='';
-    list.forEach((q,i)=>{
-      const th=THEMES[q.t];
-      const d=document.createElement('div');
-      d.className='q '+q.s; d.dataset.theme=q.t; d.tabIndex=0; d.setAttribute('role','listitem');
-      d.style.setProperty('--bd',th.bd);
-      d.style.setProperty('--tgbg',th.bg);
-      d.style.setProperty('--tx',th.tx);
-      d.style.setProperty('--fdur',(7+(i%6))+'s');
-      d.style.setProperty('--fdelay',((i%9)*0.4).toFixed(2)+'s');
-      d.style.setProperty('--fin',Math.min(i*0.02,0.5).toFixed(2)+'s');
-      d.innerHTML='<div class="inner"><p>“'+q.x+'”</p></div>';
-      d.addEventListener('mouseenter',()=>setOrigin(d));
-      d.addEventListener('focus',()=>setOrigin(d));
-      cloud.appendChild(d);
-    });
-  }
-  render(shuffle(QUOTES.slice()));
-
-  let active='all';
-  function applyFilter(key){
-    active=key;
-    [...filters.querySelectorAll('.chip')].forEach(c=>c.classList.toggle('active',c.dataset.filter===key));
-    cloud.querySelectorAll('.q').forEach(qd=>qd.classList.toggle('hide', key!=='all' && qd.dataset.theme!==key));
-  }
-  function makeChip(key,label,cls){
-    const c=document.createElement('button');
-    c.className='chip'+(cls?' '+cls:''); c.dataset.filter=key;
-    if(key==='all'){c.textContent='All voices'; c.classList.add('active');}
-    else{c.innerHTML='<span class="dot" style="background:'+THEMES[key].bd+'"></span>'+label;}
-    c.onclick=()=>applyFilter(key);
-    filters.appendChild(c);
-  }
-  makeChip('all');
-  Object.entries(THEMES).forEach(([k,v])=>makeChip(k,v.label));
-  const sh=document.createElement('button');
-  sh.className='chip shuffle'; sh.innerHTML='↺ Shuffle'; sh.dataset.filter='__sh';
-  sh.onclick=()=>{render(shuffle(QUOTES.slice())); applyFilter(active);};
-  filters.appendChild(sh);
-})();
-</script>
-
 <!-- ===== FOUNDATION ROLE ===== -->
 <section>
   <div class="wrap" style="max-width:840px;">
@@ -1252,6 +1098,160 @@
     <p class="timeline-note">Updates will be shared as each milestone is reached. Sign up below to stay informed.</p>
   </div>
 </section>
+
+<!-- ===== IN THEIR OWN WORDS (quote cloud) ===== -->
+<section id="voices" class="voices">
+  <div class="wrap">
+    <div class="section-head section-head--wide">
+      <h2 id="voices-title">In their own words</h2>
+      <p>What residents want from their library, verbatim from 568 survey responses. Hover or tap any quote to read it.</p>
+    </div>
+    <div class="filters" id="voicesFilters"></div>
+    <div class="cloud" id="voicesCloud" role="list" aria-labelledby="voices-title"></div>
+    <p class="voices-foot">Real resident responses, lightly trimmed &middot; Facilities Survey 2025</p>
+  </div>
+</section>
+<script>
+(function () {
+  const THEMES = {
+    community:{label:"Community & gathering", bd:"#0a3d6e", bg:"#e7eef5", tx:"#0a3d6e"},
+    cafe:{label:"Café & food", bd:"#b85a2e", bg:"#f7e7dd", tx:"#7d3a1a"},
+    comfort:{label:"Comfort & vibe", bd:"#d99a00", bg:"#fbf0cf", tx:"#6b4e00"},
+    youth:{label:"Teens & kids", bd:"#6a4a86", bg:"#efe8f4", tx:"#4f3566"},
+    maker:{label:"Maker & STEAM", bd:"#3f7a52", bg:"#e4f0e7", tx:"#2c5a3b"},
+    outdoor:{label:"Outdoor & terrace", bd:"#2f7d77", bg:"#e0f0ee", tx:"#1f5854"},
+    access:{label:"Accessibility", bd:"#1f6aa8", bg:"#e6f1fb", tx:"#134b78"},
+    reading:{label:"Reading & browsing", bd:"#8a6d3b", bg:"#f1ebdd", tx:"#5e4a26"},
+    culture:{label:"Performances & art", bd:"#c0392b", bg:"#f9e4e1", tx:"#8f2a20"}
+  };
+  const QUOTES = [
+    {t:"community",s:"xl",x:"Our libraries should be civic centers, not just for books."},
+    {t:"community",s:"xl",x:"A vibrant third place where parents can bring their kids."},
+    {t:"community",s:"md",x:"Bring people together — not to make money or get likes — but because it is core to your mission."},
+    {t:"community",s:"md",x:"Other than books, being a community gathering space is the most important function."},
+    {t:"community",s:"lg",x:"Programs and space to create more community — a monthly ‘salon’ for sharing ideas, music, poetry, and conversation."},
+    {t:"community",s:"sm",x:"Intergenerational events that encourage social connection and community."},
+    {t:"community",s:"sm",x:"I'd love if the library became a drawing point for unity in the community."},
+    {t:"community",s:"sm",x:"Keep the community rooms for mental-health outreach and community-led initiatives."},
+
+    {t:"cafe",s:"xl",x:"Please fill the café space with quality coffee and sandwiches… a social hub!"},
+    {t:"cafe",s:"md",x:"A small, simple café — so people could meet a friend for coffee before or after programs."},
+    {t:"cafe",s:"lg",x:"A comfortable lounge with couches near the café, where people can sit, read, gather, and work."},
+    {t:"cafe",s:"sm",x:"Bring back the café in a way that supports and employs people of the community."},
+    {t:"cafe",s:"sm",x:"Cooking classes and a coffee shop for informal gatherings."},
+    {t:"cafe",s:"sm",x:"If you could do a café, that would attract more people."},
+    {t:"cafe",s:"md",x:"Coffee, comfortable couches, quiet nooks and tables."},
+
+    {t:"comfort",s:"xl",x:"Create a space the entire community is proud of — beautiful light, comfortable seating, real art, outdoor spaces."},
+    {t:"comfort",s:"md",x:"Coffee-house vibes with comfy seats. A place for parents and kids to be together that's enjoyable for both."},
+    {t:"comfort",s:"md",x:"Lots of natural lighting and natural elements — plants, greenery, water features, natural wood."},
+    {t:"comfort",s:"lg",x:"If there were areas that felt specifically meant for reading… the more comfortable and welcoming, the better."},
+    {t:"comfort",s:"sm",x:"Books and coffee and studying and community go so well together!"},
+    {t:"comfort",s:"sm",x:"Cozy, comfy chairs in quiet, comfortable spaces."},
+    {t:"comfort",s:"sm",x:"Make it like a comfortable coffee shop."},
+    {t:"comfort",s:"sm",x:"A welcoming reading area near the front door, with comfortable chairs."},
+
+    {t:"youth",s:"xl",x:"There are so few spaces for teens to hang out in town. Could we make one they actually want to go to?"},
+    {t:"youth",s:"md",x:"Teens need thoughtful, relevant and safe spaces, activities and academic support."},
+    {t:"youth",s:"lg",x:"A teen room teens were actually using — gaming stations, a social space with a small stage, and access to the outside."},
+    {t:"youth",s:"md",x:"More for families with little kids and with tweens and teens, to do together after school."},
+    {t:"youth",s:"sm",x:"Teenagers would really appreciate more room dedicated just for them."},
+    {t:"youth",s:"sm",x:"A safe, cool space for tween and teen girls to hang out — there are so few places."},
+    {t:"youth",s:"sm",x:"Children's spaces should have lots of natural light."},
+
+    {t:"maker",s:"xl",x:"Wonderful maker spaces where kids and adults can experiment with 3D printing, robotics, and coding."},
+    {t:"maker",s:"md",x:"A dedicated STEM area where kids can do hands-on experiments, coding, and group projects."},
+    {t:"maker",s:"lg",x:"If there were a maker space, our household would provide equipment — sewing machines, 3D printers, looms, leatherworking tools."},
+    {t:"maker",s:"sm",x:"Experiential classes: cooking, 3D printing, chess, woodworking."},
+    {t:"maker",s:"sm",x:"More trades and hands-on courses such as woodworking."},
+    {t:"maker",s:"sm",x:"Maker events for adults, not just teens."},
+    {t:"maker",s:"sm",x:"A music room — both for recording digitally and for playing."},
+
+    {t:"outdoor",s:"lg",x:"A beautiful terrace on the third floor facing the City, with a seasonal café — a wonderful community spot."},
+    {t:"outdoor",s:"md",x:"A gorgeous roof terrace and garden all can enjoy — and a possible event space, too."},
+    {t:"outdoor",s:"md",x:"A water feature on an outdoor reading area — so nice to read beside the sound of running water."},
+    {t:"outdoor",s:"sm",x:"Could you do outdoor films in the plaza?"},
+    {t:"outdoor",s:"sm",x:"Loved the outdoor storytimes — would love more in nice weather."},
+    {t:"outdoor",s:"sm",x:"Convert the outdoor space into a community-inviting, multipurpose space."},
+
+    {t:"access",s:"xl",x:"Handicap access is desperately needed at the Bellevue Ave branch."},
+    {t:"access",s:"md",x:"So many older people live nearby, and the stairs are too difficult. Easy access is important."},
+    {t:"access",s:"sm",x:"Elevator or ramp access would be nice for strollers."},
+    {t:"access",s:"sm",x:"I love the old building… just updated for ADA and wheelchair access!"},
+    {t:"access",s:"md",x:"Restore the historic integrity of this beautiful building, with contemporary technology and sustainability."},
+
+    {t:"reading",s:"md",x:"More sections where librarians curate and highlight things, like at a bookstore — browsing is more fun."},
+    {t:"reading",s:"sm",x:"More inviting displays of books. More of a bookstore vibe."},
+    {t:"reading",s:"sm",x:"Genre-based sections for easier browsing, with reading pods and adjustable lighting."},
+    {t:"reading",s:"sm",x:"Clear graphic maps showing what can be found where."},
+    {t:"reading",s:"lg",x:"A quiet space where there's silence so patrons can work — private study rooms, with options for small groups."},
+    {t:"reading",s:"sm",x:"More college-like study spaces — a private room to hunker down and work."},
+
+    {t:"culture",s:"md",x:"Small theater and music productions and art exhibits — a way to deepen partnerships with our schools."},
+    {t:"culture",s:"sm",x:"An auditorium with graduated seating rather than a flat floor."},
+    {t:"culture",s:"sm",x:"Dedicated gallery space for art — not a hallway."},
+    {t:"culture",s:"sm",x:"Live theater, concerts by local groups, and lectures by leaders in their field."},
+
+    {t:"community",s:"xl",x:"Montclair deserves a great library."},
+    {t:"comfort",s:"sm",x:"I like where we are going!"},
+    {t:"community",s:"sm",x:"These ideas are all so cool — I want to see them all happen."}
+  ];
+
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+  const cloud = document.getElementById('voicesCloud');
+  const filters = document.getElementById('voicesFilters');
+  if (!cloud || !filters) return;
+
+  function setOrigin(el){
+    const r=el.getBoundingClientRect(), W=innerWidth, H=innerHeight;
+    const cx=r.left+r.width/2, cy=r.top+r.height/2;
+    const ox = cx<W*0.30?'left':cx>W*0.70?'right':'center';
+    const oy = cy<H*0.30?'top':cy>H*0.70?'bottom':'center';
+    el.style.transformOrigin=ox+' '+oy;
+  }
+  function render(list){
+    cloud.innerHTML='';
+    list.forEach((q,i)=>{
+      const th=THEMES[q.t];
+      const d=document.createElement('div');
+      d.className='q '+q.s; d.dataset.theme=q.t; d.tabIndex=0; d.setAttribute('role','listitem');
+      d.style.setProperty('--bd',th.bd);
+      d.style.setProperty('--tgbg',th.bg);
+      d.style.setProperty('--tx',th.tx);
+      d.style.setProperty('--fdur',(7+(i%6))+'s');
+      d.style.setProperty('--fdelay',((i%9)*0.4).toFixed(2)+'s');
+      d.style.setProperty('--fin',Math.min(i*0.02,0.5).toFixed(2)+'s');
+      d.innerHTML='<div class="inner"><p>“'+q.x+'”</p></div>';
+      d.addEventListener('mouseenter',()=>setOrigin(d));
+      d.addEventListener('focus',()=>setOrigin(d));
+      cloud.appendChild(d);
+    });
+  }
+  render(shuffle(QUOTES.slice()));
+
+  let active='all';
+  function applyFilter(key){
+    active=key;
+    [...filters.querySelectorAll('.chip')].forEach(c=>c.classList.toggle('active',c.dataset.filter===key));
+    cloud.querySelectorAll('.q').forEach(qd=>qd.classList.toggle('hide', key!=='all' && qd.dataset.theme!==key));
+  }
+  function makeChip(key,label,cls){
+    const c=document.createElement('button');
+    c.className='chip'+(cls?' '+cls:''); c.dataset.filter=key;
+    if(key==='all'){c.textContent='All voices'; c.classList.add('active');}
+    else{c.innerHTML='<span class="dot" style="background:'+THEMES[key].bd+'"></span>'+label;}
+    c.onclick=()=>applyFilter(key);
+    filters.appendChild(c);
+  }
+  makeChip('all');
+  Object.entries(THEMES).forEach(([k,v])=>makeChip(k,v.label));
+  const sh=document.createElement('button');
+  sh.className='chip shuffle'; sh.innerHTML='↺ Shuffle'; sh.dataset.filter='__sh';
+  sh.onclick=()=>{render(shuffle(QUOTES.slice())); applyFilter(active);};
+  filters.appendChild(sh);
+})();
+</script>
 
 <!-- ===== FEEDBACK / SIGNUP ===== -->
 <section id="feedback">
