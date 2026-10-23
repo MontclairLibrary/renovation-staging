@@ -659,6 +659,14 @@
   @media (max-width: 820px) { .firm-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 520px) { .firm-grid { grid-template-columns: 1fr; } }
 
+  /* Committee / people roster */
+  .roster { list-style: none; padding: 0; max-width: 840px; margin: 4px auto 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 32px; }
+  .roster li { position: relative; padding-left: 16px; }
+  .roster li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+  .roster .r-name { display: block; font-weight: 700; color: var(--ink); font-size: 1rem; line-height: 1.35; }
+  .roster .r-role { display: block; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4; margin-top: 2px; }
+  @media (max-width: 560px) { .roster { grid-template-columns: 1fr; gap: 14px; } }
+
   /* Session schedule table */
   .schedule-wrap { max-width: 840px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .schedule { width: 100%; border-collapse: collapse; font-size: 1rem; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); }
